@@ -1,2 +1,3 @@
 enabled: true               # global enable/disable the entire plugin
 trackingId: ''              # GA tracking ID
+anonymizeIp: false          # IP Anonymization
