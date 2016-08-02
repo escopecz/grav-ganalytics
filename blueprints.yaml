@@ -38,7 +38,7 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: Yes
-        0: No
+        1: Enabled
+        0: Disabled
       validate:
         type: bool

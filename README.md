@@ -27,6 +27,7 @@ You should now have all the plugin files under
 ```
 enabled: true
 trackingId: ''
+anonymizeIp: false
 ```
 
 If you need to change any value, then the best process is to copy the [ganalytics.yaml](ganalytics.yaml) file into your `users/config/plugins/` folder (create it if it doesn't exist), and then modify there. This will override the default settings.
