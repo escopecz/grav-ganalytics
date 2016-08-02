@@ -31,3 +31,14 @@ form:
       label: Tracking ID
       placeholder: 'UA-...'
       help: Google Analytics tracking ID. In format UA-00000000-0.
+
+    anonymizeIp:
+      type: toggle
+      label: IP Anonymization
+      hightlight: 1
+      default: 0
+      options:
+        1: Yes
+        0: No
+      validate:
+        type: bool
