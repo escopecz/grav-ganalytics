@@ -34,10 +34,10 @@ class GanalyticsPlugin extends Plugin
                 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');                
             ";
 
-            $anomizeIp = $this->config->get('plugins.ganalytics.anonymizeIp') ? 'true' : 'false';
+            $anonymizeIp = $this->config->get('plugins.ganalytics.anonymizeIp') ? 'true' : 'false';
             $functions = "
                 ga('create', '{$trackingId}', 'auto');
-                ga('set', 'anonymizeIp', {$anomizeIp});
+                ga('set', 'anonymizeIp', {$anonymizeIp});
                 ga('send', 'pageview');
             ";
 
