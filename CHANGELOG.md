@@ -2,9 +2,11 @@
 ## 12/21/2016
 
 1. [](#new)
-    * Decide for which IP addresses the Google Analytics code will be included
+    * Block IP addresses (_Google Analytics code will not be embedded_) 
 1. [](#improved)
-    * Added german translation 
+    * Added german translation
+1. [](#bugfix)
+    * Fixed the date format in the changelog 
  
 # v1.2.0
 ## 08/11/2016

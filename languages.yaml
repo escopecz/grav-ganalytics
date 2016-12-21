@@ -10,7 +10,7 @@ en:
     RENAME_GA: "(ga) Variable"
     RENAME_GA_HELP: "Rename the global (ga) variable of the Google Analytics object"
     BLOCKED_IPS: "Blocked IP addresses"
-    BLOCKED_IPS_HELP: "For the given IP addresses the Google Analytics code will not be included"
+    BLOCKED_IPS_HELP: "For the given IP addresses the Google Analytics code will not be embedded"
     DEBUG_STATUS: "Debug Version"
     DEBUG_STATUS_HELP: "Enable the debug version of the analytics.js library"
     DEBUG_TRACE: "Trace Debugging"
