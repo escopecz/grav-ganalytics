@@ -25,12 +25,13 @@ You should now have all the plugin files under
 # Config Defaults
 
 ```
-enabled: true               # global enable/disable the entire plugin
-trackingId: ''              # GA tracking ID
-anonymizeIp: false          # IP Anonymization
-renameGa: ''                # GA Object renaming
-debugStatus: false          # Debugging Enabled/Disabled
-debugTrace: false           # Trace Debugging Enabled/Disabled
+enabled: true               # Global enable/disable the entire plugin
+trackingId: ''              # GA Tracking ID `REQUIRED`
+renameGa: ''                # Other name for the global (ga) variable
+anonymizeIp: false          # Enable/Disable IP Anonymization
+blockedIps:                 # Array of blocked IPs
+debugStatus: false          # Enable/disable Debugging
+debugTrace: false           # Enable/Disable Trace Debugging
 ```
 
 If you need to change any value, then the best process is to copy the [ganalytics.yaml](ganalytics.yaml) file into your `users/config/plugins/` folder (create it if it doesn't exist), and then modify there. This will override the default settings.
