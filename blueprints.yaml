@@ -17,12 +17,12 @@ form:
 
     Basics:
       type: section
-      title: Basics
+      title: PLUGIN_GANALYTICS.SECTION_GENERAL
       underline: false
 
     enabled:
       type: toggle
-      label: Plugin Status
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
       hightlight: 1
       default: 0
       options:
@@ -34,18 +34,28 @@ form:
     trackingId:
       type: text
       size: medium
-      label: Tracking ID
-      placeholder: 'UA-...'
-      help: Google Analytics tracking ID. In format UA-00000000-0
+      label: PLUGIN_GANALYTICS.TACKING_ID
+      help: PLUGIN_GANALYTICS.TACKING_ID_HELP
+      placeholder: "UA-00000000-0"
+      validate:
+        required: true
 
     Advanced:
       type: section
-      title: Advanced
+      title: PLUGIN_GANALYTICS.SECTION_ADVANCED
       underline: true
+
+    renameGa:
+      type: text
+      label: PLUGIN_GANALYTICS.RENAME_GA
+      help: PLUGIN_GANALYTICS.RENAME_GA_HELP
+      size: small
+      placeholder: "ga"
 
     anonymizeIp:
       type: toggle
-      label: IP Anonymization
+      label: PLUGIN_GANALYTICS.ANONYMIZE_IP
+      help: PLUGIN_GANALYTICS.ANONYMIZE_IP_HELP
       hightlight: 1
       default: 0
       options:
@@ -53,23 +63,16 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-      help: Anonymize the IP address for all hits
-
-    renameGa:
-      type: text
-      label: Renaming the Global (ga) Object
-      size: small
-      placeholder: "ga"
-      help: In some cases you have to rename the ga variable
 
     Debug:
       type: section
-      title: Debug
+      title: PLUGIN_GANALYTICS.SECTION_DEBUG
       underline: true
 
     debugStatus:
       type: toggle
-      label: Debug Status
+      label: PLUGIN_GANALYTICS.DEBUG_STATUS
+      help: PLUGIN_GANALYTICS.DEBUG_STATUS_HELP
       hightlight: 1
       default: 0
       options:
@@ -80,7 +83,8 @@ form:
 
     debugTrace:
       type: toggle
-      label: Trace Debugging
+      label: PLUGIN_GANALYTICS.DEBUG_TRACE
+      help: PLUGIN_GANALYTICS.DEBUG_TRACE_HELP
       hightlight: 1
       default: 0
       options:
@@ -88,4 +92,3 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-      help: Enabling trace debugging will output more verbose information to the console
