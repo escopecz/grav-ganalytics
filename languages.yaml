@@ -8,7 +8,7 @@ en:
     ANONYMIZE_IP: "IP Anonymization"
     ANONYMIZE_IP_HELP: "Enable the anonymization of the IP address"
     RENAME_GA: "(ga) Variable"
-    RENAME_GA_HELP: "Rename the globale (ga) variable of the Google Analytics object"
+    RENAME_GA_HELP: "Rename the global (ga) variable of the Google Analytics object"
     BLOCKED_IPS: "Blocked IP addresses"
     BLOCKED_IPS_HELP: "For the given IP addresses the Google Analytics code will not be included"
     DEBUG_STATUS: "Debug Version"
