@@ -64,6 +64,14 @@ form:
       validate:
         type: bool
 
+    blockedIps:
+      type: selectize
+      size: large
+      label: PLUGIN_GANALYTICS.BLOCKED_IPS
+      help: PLUGIN_GANALYTICS.BLOCKED_IPS_HELP
+      validate:
+        type: commalist
+
     Debug:
       type: section
       title: PLUGIN_GANALYTICS.SECTION_DEBUG

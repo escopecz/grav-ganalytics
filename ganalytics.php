@@ -1,4 +1,5 @@
 <?php
+
 namespace Grav\Plugin;
 
 use Grav\Common\Plugin;
@@ -27,42 +28,66 @@ class GanalyticsPlugin extends Plugin
     }
 
     /**
+     * Return the Google Analytics Tracking Code
+     * @param string $gaName Global variable name for the GA object
+     * @return string
+     */
+    private function getTrackingCode($gaName)
+    {
+        $script = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug.js' : 'analytics.js';
+        return
+          "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n".
+          "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n".
+          "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n".
+          "})(window,document,'script','//www.google-analytics.com/{$script}','{$gaName}');\n\n"
+        ;
+    }
+
+    /**
+     * Return all personalized GA settings
+     * @param string $trackingId Google Analytics Tracking ID
+     * @param string $gaName Global variable name for the GA object
+     * @return array
+     */
+    private function getTrackingSettings($trackingId, $gaName)
+    {
+        $settings = [
+          'trace-debug' =>  "window.ga_debug = {trace: true};",
+          'create'      => "{$gaName}('create', '{$trackingId}', 'auto');",
+          'anonymize'   => "{$gaName}('set', 'anonymizeIp', true);",
+          'send'        => "{$gaName}('send', 'pageview');"
+        ];
+
+        if (!$this->config->get('plugins.ganalytics.debugTrace', false)) unset ($settings['trace-debug']);
+        if (!$this->config->get('plugins.ganalytics.anonymizeIp', false)) unset ($settings['anonymize']);
+
+        return $settings;
+    }
+
+    /**
      * Add GA tracking JS when the assets are initialized
      */
     public function onAssetsInitialized()
     {
-        if ($this->isAdmin()) {
-            return;
-        }
+        if ($this->isAdmin()) return; // Return if we are in the Admin Plugin
 
-        $trackingId = trim($this->config->get('plugins.ganalytics.trackingId'));
+        // Get the GA Tracking ID
+        $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
+        if (empty($trackingId)) return;
 
-        if ($trackingId) {
-            $script = $this->config->get('plugins.ganalytics.debugStatus') ? 'analytics_debug.js' : 'analytics.js';
+        // Maybe the IP is blocked
+        $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
+        if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) return;
 
-            // Global (ga) Object
-            $gaName = trim($this->config->get('plugins.ganalytics.renameGa'));
-            if (!$gaName) $gaName = 'ga';
+        // Global (ga) variable
+        $gaName = trim($this->config->get('plugins.ganalytics.renameGa', ''));
+        if (empty($gaName)) $gaName = 'ga';
 
-            $code =
-                "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n".
-                "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n".
-                "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n".
-                "})(window,document,'script','//www.google-analytics.com/{$script}','{$gaName}');\n"
-            ;
+        // Tracking Code and settings
+        $settings = $this->getTrackingSettings($trackingId, $gaName);
+        $code = $this->getTrackingCode($gaName);
+        $code.= join(PHP_EOL, $settings);
 
-            $functions = [
-                'trace-debug' =>  "window.ga_debug = {trace: true};",
-                'create'      => "{$gaName}('create', '{$trackingId}', 'auto');",
-                'anonymize'   => "{$gaName}('set', 'anonymizeIp', true);",
-                'send'        => "{$gaName}('send', 'pageview');"
-            ];
-
-            if (!$this->config->get('plugins.ganalytics.debugTrace')) unset ($functions['trace-debug']);
-            if (!$this->config->get('plugins.ganalytics.anonymizeIp')) unset ($functions['anonymize']);
-
-            $code.= join(PHP_EOL, $functions);
-            $this->grav['assets']->addInlineJs($code);
-        }
+        $this->grav['assets']->addInlineJs($code);
     }
 }
