@@ -69,13 +69,14 @@ class GanalyticsPlugin extends Plugin
      */
     public function onAssetsInitialized()
     {
-        if ($this->isAdmin()) return; // Return if we are in the Admin Plugin
+        // Don't proceed if we are in the admin plugin
+        if ($this->isAdmin()) return;
 
         // Get the GA Tracking ID
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
         if (empty($trackingId)) return;
 
-        // Maybe the IP is blocked
+        // Don't proceed if the IP address is blocked
         $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
         if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) return;
 
