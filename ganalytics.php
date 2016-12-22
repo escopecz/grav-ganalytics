@@ -29,18 +29,27 @@ class GanalyticsPlugin extends Plugin
 
     /**
      * Return the Google Analytics Tracking Code
+     * @param string $scriptName Name of the GA script library
      * @param string $gaName Global variable name for the GA object
+     * @param bool $async Determine if the GA script should be loaded and executed asynchronously
      * @return string
      */
-    private function getTrackingCode($gaName)
+    private function getTrackingCode($scriptName, $gaName, $async=false)
     {
-        $script = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug.js' : 'analytics.js';
-        return
-          "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n".
-          "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n".
-          "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n".
-          "})(window,document,'script','//www.google-analytics.com/{$script}','{$gaName}');\n\n"
-        ;
+        if ($async) {
+            $code =
+              "window.GoogleAnalyticsObject = '{$gaName}';\n".
+              "window.{$gaName}=window.{$gaName}||function(){({$gaName}.q={$gaName}.q||[]).push(arguments)};{$gaName}.l=+new Date;\n"
+            ;
+        } else {
+            $code =
+                "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n".
+                "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n".
+                "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n".
+                "})(window,document,'script','//www.google-analytics.com/{$scriptName}.js','{$gaName}');\n"
+            ;
+        }
+        return $code;
     }
 
     /**
@@ -72,23 +81,29 @@ class GanalyticsPlugin extends Plugin
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) return;
 
-        // Get the GA Tracking ID
+        // Parameters
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
+        $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
+        $async      = $this->config->get('plugins.ganalytics.async', false);
+        $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
+        $gaName     = trim($this->config->get('plugins.ganalytics.renameGa', ''));
+
+        // Don't proceed if there is no GA Tracking ID
         if (empty($trackingId)) return;
 
         // Don't proceed if the IP address is blocked
-        $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
         if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) return;
 
-        // Global (ga) variable
-        $gaName = trim($this->config->get('plugins.ganalytics.renameGa', ''));
+        // Set the global (ga) variable name
         if (empty($gaName)) $gaName = 'ga';
 
         // Tracking Code and settings
         $settings = $this->getTrackingSettings($trackingId, $gaName);
-        $code = $this->getTrackingCode($gaName);
+        $code = $this->getTrackingCode($scriptName, $gaName, $async);
         $code.= join(PHP_EOL, $settings);
 
+        // Embed Goggle Analytics script
         $this->grav['assets']->addInlineJs($code);
+        if ($async) $this->grav['assets']->addAsyncJs("//www.google-analytics.com/{$scriptName}.js");
     }
 }
