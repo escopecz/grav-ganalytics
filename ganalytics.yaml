@@ -1,6 +1,7 @@
-enabled: true               # global enable/disable the entire plugin
-trackingId: ''              # GA tracking ID
-anonymizeIp: false          # IP Anonymization
-renameGa: ''                # GA Object renaming
-debugStatus: false          # Debugging Enabled/Disabled
-debugTrace: false           # Trace Debugging Enabled/Disabled
+enabled: true               # Global enable/disable the entire plugin
+trackingId: ''              # GA Tracking ID `REQUIRED`
+renameGa: ''                # Other name for the global (ga) variable
+anonymizeIp: false          # Enable/Disable IP Anonymization
+blockedIps: []              # Array of blocked IP addresses
+debugStatus: false          # Enable/disable Debugging
+debugTrace: false           # Enable/Disable Trace Debugging

@@ -29,7 +29,7 @@ enabled: true               # Global enable/disable the entire plugin
 trackingId: ''              # GA Tracking ID `REQUIRED`
 renameGa: ''                # Other name for the global (ga) variable
 anonymizeIp: false          # Enable/Disable IP Anonymization
-blockedIps:                 # Array of blocked IPs
+blockedIps: []              # Array of blocked IPs
 debugStatus: false          # Enable/disable Debugging
 debugTrace: false           # Enable/Disable Trace Debugging
 ```

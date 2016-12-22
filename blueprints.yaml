@@ -9,6 +9,7 @@ author:
 homepage: https://github.com/escopecz/grav-ganalytics
 keywords: google, plugin, tracking, analytics, grav
 bugs: https://github.com/escopecz/grav-ganalytics/issues
+docs: https://github.com/escopecz/grav-ganalytics/blob/master/README.md
 license: MIT
 
 form:
