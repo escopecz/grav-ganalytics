@@ -1,6 +1,7 @@
 enabled: true               # Global enable/disable the entire plugin
 trackingId: ''              # GA Tracking ID `REQUIRED`
 renameGa: ''                # Other name for the global (ga) variable
+forceSsl: false             # Enable/Disable SSL
 async: false                # Enable/Disable Asynchronously Tracking
 anonymizeIp: false          # Enable/Disable IP Anonymization
 blockedIps: []              # Array of blocked IP addresses

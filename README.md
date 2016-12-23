@@ -43,6 +43,7 @@ enabled: true
 trackingId: ''
 renameGa: ''
 async: false
+forceSsl: false
 anonymizeIp: false
 blockedIps: []
 debugStatus: false
@@ -52,7 +53,8 @@ debugTrace: false
 * `enabled` Toggles if the Google Analytics plugin is turned on or off
 * `trackingId` The Google Analytics Tracking ID. This value is **required**.
 * `async` Toggles if Google Analytics script is loaded and executed asynchronously.
-* `renameGa` In some cases you'd like to add Google Analytics to your page, but the `ga` variable is already being used for something else. To deal with this, you can just rename the global ga object.
+* `forceSsl` Toggles if Google Analytics should send all data using HTTPS.
+* `renameGa` In some cases you'd like to add Google Analytics to your page, but the `ga` variable is already being used for something else. To deal with this, you can rename the global ga object.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
 * `debugStatus` Toggles if the debug version of Goggle Analytics is enabled or disabled.

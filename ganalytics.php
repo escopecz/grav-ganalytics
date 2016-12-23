@@ -64,11 +64,13 @@ class GanalyticsPlugin extends Plugin
           'trace-debug' =>  "window.ga_debug = {trace: true};",
           'create'      => "{$gaName}('create', '{$trackingId}', 'auto');",
           'anonymize'   => "{$gaName}('set', 'anonymizeIp', true);",
+          'force-ssl'   => "{$gaName}('set', 'forceSSL', true);",
           'send'        => "{$gaName}('send', 'pageview');"
         ];
 
         if (!$this->config->get('plugins.ganalytics.debugTrace', false)) unset ($settings['trace-debug']);
         if (!$this->config->get('plugins.ganalytics.anonymizeIp', false)) unset ($settings['anonymize']);
+        if (!$this->config->get('plugins.ganalytics.forceSsl', false)) unset ($settings['force-ssl']);
 
         return $settings;
     }
