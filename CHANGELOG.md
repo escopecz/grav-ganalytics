@@ -7,7 +7,8 @@
     * Custom Cookie Configuration. Name, domain and expiration time are configurable.
     * Force SSL - Send all data using SSL, even from insecure (HTTP) pages
 1. [](#improved)
-    * Better use and configuration of the global object name. Please don't use `renameGa` anymore.
+    * Improve plugin configuration with tab views.
+    * Better use and configuration of the global object name. Please use `objectName` instead of `renameGa`. 
     
 # v1.3.0
 ## 12/21/2016
