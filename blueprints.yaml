@@ -1,6 +1,6 @@
 name: Google Analytics
 version: 1.4.0
-description: "The Google Analytics Plugin allows you to integrate and configure Google Analytics without the need to touch any code within your Grav site."
+description: "Easily integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
   name: John Linhart
@@ -41,6 +41,11 @@ form:
       validate:
         required: true
 
+    Advanced:
+      type: section
+      title: PLUGIN_GANALYTICS.SECTION_ADVANCED
+      underline: true
+
     position:
       type: toggle
       label: PLUGIN_GANALYTICS.POSITION
@@ -53,17 +58,15 @@ form:
       validate:
         type: string
 
-    Advanced:
-      type: section
-      title: PLUGIN_GANALYTICS.SECTION_ADVANCED
-      underline: true
+    renameGa: # DEPRECATED
+      type: ignore
 
-    renameGa:
+    objectName:
       type: text
-      label: PLUGIN_GANALYTICS.RENAME_GA
-      help: PLUGIN_GANALYTICS.RENAME_GA_HELP
+      label: PLUGIN_GANALYTICS.OBJECT_NAME
+      help: PLUGIN_GANALYTICS.OBJECT_NAME_HELP
       size: small
-      placeholder: "ga"
+      default: "ga"
 
     async:
       type: toggle
@@ -72,8 +75,8 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
       validate:
         type: bool
 
@@ -84,8 +87,8 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
       validate:
         type: bool
 
@@ -96,8 +99,8 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
       validate:
         type: bool
 
@@ -108,6 +111,47 @@ form:
       help: PLUGIN_GANALYTICS.BLOCKED_IPS_HELP
       validate:
         type: commalist
+
+    Cookie:
+      type: section
+      title: PLUGIN_GANALYTICS.SECTION_COOKIE
+      underline: true
+
+    cookieConfig:
+      type: toggle
+      label: PLUGIN_GANALYTICS.COOKIE_CONFIG
+      help: PLUGIN_GANALYTICS.COOKIE_CONFIG_HELP
+      hightlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    cookieName:
+      type: text
+      label: PLUGIN_GANALYTICS.COOKIE_NAME
+      help: PLUGIN_GANALYTICS.COOKIE_NAME_HELP
+      size: small
+      default: "_ga"
+
+    cookieDomain:
+      type: text
+      label: PLUGIN_GANALYTICS.COOKIE_DOMAIN
+      help: PLUGIN_GANALYTICS.COOKIE_DOMAIN_HELP
+      size: medium
+
+    cookieExpires:
+      type: text
+      size: small
+      label: PLUGIN_GANALYTICS.COOKIE_EXPIRES
+      help: PLUGIN_GANALYTICS.COOKIE_EXPIRES_HELP
+      append: PLUGIN_GANALYTICS.SECONDS
+      default: 63072000
+      validate:
+          type: number
+          min: 0
 
     Debug:
       type: section
@@ -121,8 +165,8 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
       validate:
         type: bool
 
@@ -133,7 +177,7 @@ form:
       hightlight: 1
       default: 0
       options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
       validate:
         type: bool

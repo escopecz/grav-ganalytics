@@ -3,9 +3,12 @@
 
 1. [](#new)
     * Preload the Google Analytics script asynchronously
-    * Choose the Google Analytics code position in the HTML document (head or body).
-    * Force SSL - Send all data using SSL, even from insecure (HTTP) pages    
-
+    * Choose the code position in the HTML document (head or body)
+    * Custom Cookie Configuration. Name, domain and expiration time are configurable.
+    * Force SSL - Send all data using SSL, even from insecure (HTTP) pages
+1. [](#improved)
+    * Better use and configuration of the global object name. Please don't use `renameGa` anymore.
+    
 # v1.3.0
 ## 12/21/2016
 

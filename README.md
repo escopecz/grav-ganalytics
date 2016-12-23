@@ -9,6 +9,7 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 * Force SSL (HTTPS). Send all data using SSL, even from insecure (HTTP) pages.
 * Renaming of the Global (ga) Object
 * Debug Mode with Trace Debugging
+* Custom Cookie Configuration. Name, domain and expiration time are configurable.
 * Blocking IP Addresses
 * Multi-Language Support for the [Grav Administration Panel](https://github.com/getgrav/grav-plugin-admin)
 
@@ -41,26 +42,40 @@ Before configuring this plugin, you should copy the `user/plugins/ganalytics/gan
 Here is the default configuration and an explanation of available options:
 
 ```yaml
-enabled: true 
+enabled: true
 trackingId: ""
+
 position: "head"
-renameGa: ""
-async: false
+objectName: "ga"
 forceSsl: false
+async: false
 anonymizeIp: false
 blockedIps: []
+
+cookieConfig: false
+cookieName: "_ga"
+cookieDomain: ""
+cookieExpires: 63072000
+
 debugStatus: false
 debugTrace: false
 ```
 
 * `enabled` Toggles if the Google Analytics plugin is turned on or off.
 * `trackingId` The Google Analytics Tracking ID. This value is **required**.
-* `position` Code Position in the HTML document (head or body).
+
+* `position` Code Position in the HTML document (`head` or `body`). Default is `head`.
 * `async` Toggles if the Google Analytics script is preloaded asynchronously.
 * `forceSsl` Toggles if Google Analytics should send all data using HTTPS.
-* `renameGa` In some cases you'd like to add Google Analytics to your page, but the `ga` variable is already being used for something else. To deal with this, you can rename the global ga object.
+* `objectName` The name for the global (ga) object. Default is `ga`.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
+
+* `cookieConfig`: Toggles if the a custom cookie configuration should be used.
+* `cookieName` The cookie name. Default ist `_ga`
+* `cookieDomain`  The cookie domain.
+* `cookieExpires` The cookie expiration time in seconds. Default is 2 years (`63072000` seconds)
+
 * `debugStatus` Toggles if the debug version of Goggle Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
 
