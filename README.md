@@ -3,8 +3,9 @@
 The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) allows you to integrate and configure [Google Analytics](https://www.google.com/analytics) without the need to touch any code within your Grav site.
 
 ### Features
-* Asynchronous/Synchronous Integration
+* Preload the Google Analytics script asynchronously
 * IP Anonymization
+* Choose the Google Analytics code position in the HTML document (head or body).
 * Force SSL (HTTPS). Send all data using SSL, even from insecure (HTTP) pages.
 * Renaming of the Global (ga) Object
 * Debug Mode with Trace Debugging
@@ -41,8 +42,9 @@ Here is the default configuration and an explanation of available options:
 
 ```yaml
 enabled: true 
-trackingId: ''
-renameGa: ''
+trackingId: ""
+position: "head"
+renameGa: ""
 async: false
 forceSsl: false
 anonymizeIp: false
@@ -51,9 +53,10 @@ debugStatus: false
 debugTrace: false
 ```
 
-* `enabled` Toggles if the Google Analytics plugin is turned on or off
+* `enabled` Toggles if the Google Analytics plugin is turned on or off.
 * `trackingId` The Google Analytics Tracking ID. This value is **required**.
-* `async` Toggles if Google Analytics script is loaded and executed asynchronously.
+* `position` Code Position in the HTML document (head or body).
+* `async` Toggles if the Google Analytics script is preloaded asynchronously.
 * `forceSsl` Toggles if Google Analytics should send all data using HTTPS.
 * `renameGa` In some cases you'd like to add Google Analytics to your page, but the `ga` variable is already being used for something else. To deal with this, you can rename the global ga object.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.

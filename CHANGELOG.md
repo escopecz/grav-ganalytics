@@ -2,8 +2,9 @@
 ## 12/xx/2016
 
 1. [](#new)
-    * Force SSL - Send all data using SSL, even from insecure (HTTP) pages
-    * Asynchronously Integration - Google Analytic script can be loaded and executed asynchronously
+    * Preload the Google Analytics script asynchronously
+    * Choose the Google Analytics code position in the HTML document (head or body).
+    * Force SSL - Send all data using SSL, even from insecure (HTTP) pages    
 
 # v1.3.0
 ## 12/21/2016

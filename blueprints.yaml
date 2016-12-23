@@ -1,6 +1,6 @@
 name: Google Analytics
 version: 1.4.0
-description: "Google Analytics plugin lets you easyly embed the GA tracking to the Grav website."
+description: "The Google Analytics Plugin allows you to integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
   name: John Linhart
@@ -40,6 +40,18 @@ form:
       placeholder: "UA-00000000-0"
       validate:
         required: true
+
+    position:
+      type: toggle
+      label: PLUGIN_GANALYTICS.POSITION
+      help: PLUGIN_GANALYTICS.POSITION_HELP
+      hightlight: 1
+      default: head
+      options:
+        head: PLUGIN_GANALYTICS.POSITION_HEAD
+        body: PLUGIN_GANALYTICS.POSITION_BODY
+      validate:
+        type: string
 
     Advanced:
       type: section

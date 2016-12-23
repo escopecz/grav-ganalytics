@@ -85,6 +85,7 @@ class GanalyticsPlugin extends Plugin
 
         // Parameters
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
+        $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
         $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
         $async      = $this->config->get('plugins.ganalytics.async', false);
         $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
@@ -105,7 +106,9 @@ class GanalyticsPlugin extends Plugin
         $code.= join(PHP_EOL, $settings);
 
         // Embed Goggle Analytics script
-        $this->grav['assets']->addInlineJs($code);
-        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async');
+        $group = ($position == 'body') ? 'bottom' : null;
+
+        $this->grav['assets']->addInlineJs($code, null, $group);
+        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async', $group);
     }
 }
