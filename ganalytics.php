@@ -106,6 +106,6 @@ class GanalyticsPlugin extends Plugin
 
         // Embed Goggle Analytics script
         $this->grav['assets']->addInlineJs($code);
-        if ($async) $this->grav['assets']->addAsyncJs("//www.google-analytics.com/{$scriptName}.js");
+        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async');
     }
 }

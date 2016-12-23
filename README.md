@@ -5,6 +5,7 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 ### Features
 * Asynchronous/Synchronous Integration
 * IP Anonymization
+* Force SSL (HTTPS). Send all data using SSL, even from insecure (HTTP) pages.
 * Renaming of the Global (ga) Object
 * Debug Mode with Trace Debugging
 * Blocking IP Addresses
