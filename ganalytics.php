@@ -23,6 +23,7 @@ class GanalyticsPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
             'onAssetsInitialized' => ['onAssetsInitialized', 0]
         ];
     }
@@ -97,10 +98,9 @@ class GanalyticsPlugin extends Plugin
         return $settings;
     }
 
-    /**
-     * Handle deprecated configuration options
-     */
-    private function handleDeprecates(){
+    // Handle deprecated stuff when the plugin is initialized
+    public function onPluginsInitialized()
+    {
         $renameGa = trim($this->config->get('plugins.ganalytics.renameGa', ''));
         if (!empty($renameGa)){
             $this->config->set('plugins.ganalytics.renameGa', '');
@@ -113,8 +113,6 @@ class GanalyticsPlugin extends Plugin
      */
     public function onAssetsInitialized()
     {
-        $this->handleDeprecates();
-
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) return;
 
