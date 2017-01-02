@@ -1,6 +1,6 @@
 PLUGIN_GANALYTICS:
   SECONDS: "seconds"
-  SECTION_CONFIGURATIONS: "Configurations"
+  SECTION_CONFIGURATION: "Configuration"
   SECTION_ADVANCED: "Advanced"
   SECTION_COOKIE: "Cookie"
   SECTION_DEBUG: "Debug"
@@ -29,6 +29,6 @@ PLUGIN_GANALYTICS:
   COOKIE_EXPIRES: "Expires"
   COOKIE_EXPIRES_HELP: "The expiration time of the Google Analytics cookie. Default is two years"
   DEBUG_STATUS: "Debug Version"
-  DEBUG_STATUS_HELP: "Enable the debug version of the analyti cs.js library"
+  DEBUG_STATUS_HELP: "Enable the debug version of the analytics.js library"
   DEBUG_TRACE: "Trace Debugging"
   DEBUG_TRACE_HELP: "Enabling trace debugging will output more verbose information to the console"

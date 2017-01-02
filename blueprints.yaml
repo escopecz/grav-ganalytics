@@ -25,7 +25,7 @@ form:
 
         configuration:
           type: tab
-          title: PLUGIN_GANALYTICS.SECTION_CONFIGURATIONS
+          title: PLUGIN_GANALYTICS.SECTION_CONFIGURATION
           fields:
 
             enabled:
@@ -65,9 +65,6 @@ form:
                     body: PLUGIN_GANALYTICS.POSITION_BODY
                   validate:
                     type: string
-
-                renameGa: # DEPRECATED
-                  type: ignore
 
                 objectName:
                   type: text
