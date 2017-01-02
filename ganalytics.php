@@ -137,7 +137,7 @@ class GanalyticsPlugin extends Plugin
         $code = $this->getTrackingCode($scriptName, $objectName, $async);
         $code.= join(PHP_EOL, $settings);
 
-        // Embed Goggle Analytics script
+        // Embed Google Analytics script
         $group = ($position == 'body') ? 'bottom' : null;
 
         $this->grav['assets']->addInlineJs($code, null, $group);

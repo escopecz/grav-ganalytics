@@ -74,9 +74,9 @@ debugTrace: false
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
 * `cookieName` The cookie name. Default ist `_ga`
 * `cookieDomain`  The cookie domain.
-* `cookieExpires` The cookie expiration time in seconds. Default is 2 years (`63072000` seconds)
+* `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
-* `debugStatus` Toggles if the debug version of Goggle Analytics is enabled or disabled.
+* `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
 
 ## Usage
