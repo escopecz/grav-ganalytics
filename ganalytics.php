@@ -98,14 +98,27 @@ class GanalyticsPlugin extends Plugin
         return $settings;
     }
 
+    /**
+     * Do something with deprecated settings
+     */
+    private function processDeprecatedSettings()
+    {
+        // 1.3.0 => 1.4.0
+        // Field: "renameGa" => "objectName"
+        $renameGa = trim($this->config->get('plugins.ganalytics.renameGa', ''));
+        if (!empty($renameGa)) {
+            $settings = $this->config->get('plugins.ganalytics', []);
+            $settings['objectName'] = $renameGa;
+            unset($settings['renameGa']);
+            $this->config->set('plugins.ganalytics', $settings);
+            Plugin::saveConfig('ganalytics');
+        }
+    }
+
     // Handle deprecated stuff when the plugin is initialized
     public function onPluginsInitialized()
     {
-        $renameGa = trim($this->config->get('plugins.ganalytics.renameGa', ''));
-        if (!empty($renameGa)){
-            $this->config->set('plugins.ganalytics.renameGa', '');
-            $this->config->set('plugins.ganalytics.objectName', $renameGa);
-        }
+        $this->processDeprecatedSettings();
     }
 
     /**
@@ -116,19 +129,19 @@ class GanalyticsPlugin extends Plugin
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) return;
 
-        // Parameters
-        $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
-        $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
-        $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
-        $async      = $this->config->get('plugins.ganalytics.async', false);
-        $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
-        $objectName = trim($this->config->get('plugins.ganalytics.objectName', 'ga'));
-
         // Don't proceed if there is no GA Tracking ID
+        $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
         if (empty($trackingId)) return;
 
         // Don't proceed if the IP address is blocked
+        $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
         if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) return;
+
+        // Parameters
+        $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
+        $objectName = trim($this->config->get('plugins.ganalytics.objectName', 'ga'));
+        $async      = $this->config->get('plugins.ganalytics.async', false);
+        $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
 
         // Tracking Code and settings
         $settings = $this->getTrackingSettings($trackingId, $objectName);
