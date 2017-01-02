@@ -1,6 +1,6 @@
 PLUGIN_GANALYTICS:
   SECONDS: "seconds"
-  SECTION_GENERAL: "General"
+  SECTION_CONFIGURATIONS: "Configurations"
   SECTION_ADVANCED: "Advanced"
   SECTION_COOKIE: "Cookie"
   SECTION_DEBUG: "Debug"
