@@ -30,12 +30,12 @@ form:
 
             enabled:
               type: toggle
-              label: PLUGIN_ADMIN.PLUGIN_STATUS
+              label: PLUGIN_GANALYTICS.PLUGIN_STATUS
               hightlight: 1
               default: 0
               options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
+                1: PLUGIN_GANALYTICS.ENABLED
+                0: PLUGIN_GANALYTICS.DISABLED
               validate:
                 type: bool
 
@@ -80,8 +80,8 @@ form:
                   hightlight: 1
                   default: 0
                   options:
-                    1: PLUGIN_ADMIN.YES
-                    0: PLUGIN_ADMIN.NO
+                    1: PLUGIN_GANALYTICS._YES
+                    0: PLUGIN_GANALYTICS._NO
                   validate:
                     type: bool
 
@@ -92,8 +92,8 @@ form:
                   hightlight: 1
                   default: 0
                   options:
-                    1: PLUGIN_ADMIN.YES
-                    0: PLUGIN_ADMIN.NO
+                    1: PLUGIN_GANALYTICS._YES
+                    0: PLUGIN_GANALYTICS._NO
                   validate:
                     type: bool
 
@@ -104,8 +104,8 @@ form:
                   hightlight: 1
                   default: 0
                   options:
-                    1: PLUGIN_ADMIN.YES
-                    0: PLUGIN_ADMIN.NO
+                    1: PLUGIN_GANALYTICS._YES
+                    0: PLUGIN_GANALYTICS._NO
                   validate:
                     type: bool
 
@@ -127,8 +127,8 @@ form:
               hightlight: 1
               default: 0
               options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
+                1: PLUGIN_GANALYTICS._YES
+                0: PLUGIN_GANALYTICS._NO
               validate:
                 type: bool
 
@@ -167,8 +167,8 @@ form:
               hightlight: 1
               default: 0
               options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
+                1: PLUGIN_GANALYTICS.ENABLED
+                0: PLUGIN_GANALYTICS.DISABLED
               validate:
                 type: bool
 
@@ -179,7 +179,7 @@ form:
               hightlight: 1
               default: 0
               options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
+                1: PLUGIN_GANALYTICS.ENABLED
+                0: PLUGIN_GANALYTICS.DISABLED
               validate:
                 type: bool

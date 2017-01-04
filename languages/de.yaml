@@ -1,4 +1,9 @@
 PLUGIN_GANALYTICS:
+  _YES: "Ja"   #BUG: Only "YES" or "NO" will not work!
+  _NO: "Nein"  #BUG: Only "YES" or "NO" will not work!
+  ENABLED: "Aktiviert"
+  DISABLED: "Deaktiviert"
+  PLUGIN_STATUS: "Plugin Status"
   SECONDS: "Sekunden"
   SECTION_CONFIGURATION: "Einstellungen"
   SECTION_ADVANCED: "Erweitert"
