@@ -1,3 +1,15 @@
+# v1.4.0
+## 01/04/2017
+
+1. [](#new)
+    * Preload the Google Analytics script asynchronously
+    * Choose the code position in the HTML document (head or body)
+    * Custom Cookie Configuration. Name, domain and expiration time are configurable.
+    * Force SSL - Send all data using SSL, even from insecure (HTTP) pages
+1. [](#improved)
+    * Improve plugin configuration with tab views.
+    * Better use and configuration of the global object name. Please use `objectName` instead of `renameGa`. 
+    
 # v1.3.0
 ## 12/21/2016
 

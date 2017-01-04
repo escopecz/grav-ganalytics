@@ -1,6 +1,17 @@
-enabled: true               # global enable/disable the entire plugin
-trackingId: ''              # GA tracking ID
-anonymizeIp: false          # IP Anonymization
-renameGa: ''                # GA Object renaming
-debugStatus: false          # Debugging Enabled/Disabled
-debugTrace: false           # Trace Debugging Enabled/Disabled
+enabled: true               # Global enable/disable the entire plugin
+trackingId: ""              # GA Tracking ID `REQUIRED`
+
+position: "head"            # Code Position in the HTML document
+objectName: "ga"            # Name for the global (ga) object
+forceSsl: false             # Enable/Disable SSL
+async: false                # Enable/Disable Asynchronously Tracking
+anonymizeIp: false          # Enable/Disable IP Anonymization
+blockedIps: []              # Array of blocked IP addresses
+
+cookieConfig: false         # Use custom cookie configuration
+cookieName: "_ga"           # Cookie name
+cookieDomain: ""            # Cookie domain
+cookieExpires: 63072000     # Expiration time in seconds (Default: 2 years)
+
+debugStatus: false          # Enable/disable Debugging
+debugTrace: false           # Enable/Disable Trace Debugging
