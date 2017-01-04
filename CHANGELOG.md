@@ -1,5 +1,5 @@
 # v1.4.0
-## 12/xx/2016
+## 01/04/2017
 
 1. [](#new)
     * Preload the Google Analytics script asynchronously
