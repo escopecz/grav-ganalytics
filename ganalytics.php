@@ -83,12 +83,17 @@ class GanalyticsPlugin extends Plugin
     {
         $cookie_config = $this->getCookieConfiguration();
 		
-		$dntOptions = "{ 'logStatus': '{$dimension}' }";
+		if($this->config->get('plugins.ganalytics.dntLog', false)) {
+			$dimension = $this->config->get('plugins.ganalytics.dntDimension', "dimension1"); 
+			$dntOptions = "{ 'logStatus': '{$dimension}' }";
+		} else {
+			$dntOptions = "{}";
+		}
 		
         $settings = [
           'trace-debug' =>  "window.ga_debug = {trace: true};",
           'create'      => "{$objectName}('create', '{$trackingId}', {$cookie_config});",
-		  'dnt'			=> "{$objectName}('require', 'dnt')",
+		  'dnt'			=> "{$objectName}('require', 'dnt', {$dntOptions})",
           'anonymize'   => "{$objectName}('set', 'anonymizeIp', true);",
           'force-ssl'   => "{$objectName}('set', 'forceSSL', true);",
           'send'        => "{$objectName}('send', 'pageview');"
