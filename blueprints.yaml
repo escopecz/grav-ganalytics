@@ -72,7 +72,19 @@ form:
                   help: PLUGIN_GANALYTICS.OBJECT_NAME_HELP
                   size: small
                   default: "ga"
-
+                  
+                dnt:
+                  type: toggle
+                  label: PLUGIN_GANALYTICS.DO_NOT_TRACK
+                  help: PLUGIN_GANALYTICS.DO_NOT_TRACK_HELP
+                  hightlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_GANALYTICS._YES
+                    0: PLUGIN_GANALYTICS._NO
+                  validate:
+                    type: bool
+                  
                 async:
                   type: toggle
                   label: PLUGIN_GANALYTICS.ASYNC

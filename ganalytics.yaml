@@ -3,6 +3,7 @@ trackingId: ""              # GA Tracking ID `REQUIRED`
 
 position: "head"            # Code Position in the HTML document
 objectName: "ga"            # Name for the global (ga) object
+dnt: true                   # Do Not Track
 forceSsl: false             # Enable/Disable SSL
 async: false                # Enable/Disable Asynchronously Tracking
 anonymizeIp: false          # Enable/Disable IP Anonymization

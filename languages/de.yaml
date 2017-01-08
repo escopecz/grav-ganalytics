@@ -15,6 +15,8 @@ PLUGIN_GANALYTICS:
   POSITION_HELP: "Position des Codes im HTML-Dokument (Head oder Body)"
   POSITION_HEAD: "Kopf"
   POSITION_BODY: "Inhaltsende"
+  DO_NOT_TRACK: "Erlaube Do Not Track"
+  DO_NOT_TRACK_HELP: "Erlaubt Klienten, durch das senden des 'Do Not Track'-Headers, vom Tracking ausgeschlossen zu werden."
   ASYNC: "Asynchron laden"
   ASYNC_HELP: "Erlaubt es modernen Browsern das Google Analytics Script im Voraus zu laden"
   FORCE_SSL: "SSL erzwingen"

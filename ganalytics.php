@@ -86,12 +86,14 @@ class GanalyticsPlugin extends Plugin
         $settings = [
           'trace-debug' =>  "window.ga_debug = {trace: true};",
           'create'      => "{$objectName}('create', '{$trackingId}', {$cookie_config});",
+		  'dnt'			=> "{$objectName}('require', 'dnt')",
           'anonymize'   => "{$objectName}('set', 'anonymizeIp', true);",
           'force-ssl'   => "{$objectName}('set', 'forceSSL', true);",
           'send'        => "{$objectName}('send', 'pageview');"
         ];
 
         if (!$this->config->get('plugins.ganalytics.debugTrace', false)) unset ($settings['trace-debug']);
+		if (!$this->config->get('plugins.ganalytics.dnt', false)) unset ($settings['dnt']);
         if (!$this->config->get('plugins.ganalytics.anonymizeIp', false)) unset ($settings['anonymize']);
         if (!$this->config->get('plugins.ganalytics.forceSsl', false)) unset ($settings['force-ssl']);
 
@@ -140,6 +142,7 @@ class GanalyticsPlugin extends Plugin
         // Parameters
         $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
         $objectName = trim($this->config->get('plugins.ganalytics.objectName', 'ga'));
+		$dnt		= $this->config->get('plugins.ganalytics.dnt', false);
         $async      = $this->config->get('plugins.ganalytics.async', false);
         $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
 
@@ -150,8 +153,10 @@ class GanalyticsPlugin extends Plugin
 
         // Embed Google Analytics script
         $group = ($position == 'body') ? 'bottom' : null;
-
+		
+		if($dnt) $this->grav['assets']->addJs("//storage.googleapis.com/outfox/dnt_min.js", 9);
+		
         $this->grav['assets']->addInlineJs($code, null, $group);
-        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async', $group);
+        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 8 , true /*pipeline*/, 'async', $group);
     }
 }
