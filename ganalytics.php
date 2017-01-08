@@ -82,7 +82,9 @@ class GanalyticsPlugin extends Plugin
     private function getTrackingSettings($trackingId, $objectName)
     {
         $cookie_config = $this->getCookieConfiguration();
-
+		
+		$dntOptions = "{ 'logStatus': '{$dimension}' }";
+		
         $settings = [
           'trace-debug' =>  "window.ga_debug = {trace: true};",
           'create'      => "{$objectName}('create', '{$trackingId}', {$cookie_config});",

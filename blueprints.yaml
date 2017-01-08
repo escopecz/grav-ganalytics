@@ -73,17 +73,42 @@ form:
                   size: small
                   default: "ga"
                   
-                dnt:
-                  type: toggle
-                  label: PLUGIN_GANALYTICS.DO_NOT_TRACK
-                  help: PLUGIN_GANALYTICS.DO_NOT_TRACK_HELP
-                  hightlight: 1
-                  default: 0
-                  options:
-                    1: PLUGIN_GANALYTICS._YES
-                    0: PLUGIN_GANALYTICS._NO
-                  validate:
-                    type: bool
+                dntSection:
+                  type: section
+                  title: PLUGIN_GANALYTICS.DO_NOT_TRACK_SECTION
+                  underline: false
+                  fields:
+                  
+                    dnt:
+                      type: toggle
+                      label: PLUGIN_GANALYTICS.DO_NOT_TRACK
+                      help: PLUGIN_GANALYTICS.DO_NOT_TRACK_HELP
+                      hightlight: 1
+                      default: 0
+                      options:
+                        1: PLUGIN_GANALYTICS._YES
+                        0: PLUGIN_GANALYTICS._NO
+                      validate:
+                        type: bool
+                        
+                    dntLog:
+                      type: toggle
+                      label: PLUGIN_GANALYTICS.DO_NOT_TRACK_LOG
+                      help: PLUGIN_GANALYTICS.DO_NOT_TRACK_LOG_HELP
+                      hightlight: 1
+                      default: 0
+                      options:
+                        1: PLUGIN_GANALYTICS._YES
+                        0: PLUGIN_GANALYTICS._NO
+                      validate:
+                        type: bool
+                    
+                    dntDimension:
+                      type: text
+                      label: PLUGIN_GANALYTICS.DO_NOT_TRACK_DIMENSION
+                      help: PLUGIN_GANALYTICS.DO_NOT_TRACK_DIMENSION_HELP
+                      size: small
+                      default: "dimension1"
                   
                 async:
                   type: toggle
