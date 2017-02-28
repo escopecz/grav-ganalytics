@@ -73,10 +73,10 @@ debugTrace: false
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
 * `blockedIpRanges` Here you can blacklist IPv4 address ranges in the form `["192.177.204.1-192.177.204.254", ...]`. In addition to numerical ranges, the keywords "private", "loopback", "link-local" designate special ranges (see RFC 6890). For blacklisted ranges the Google Analytics script will not be embedded.
-* `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `_blockGA`
+* `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `blockGA`
 
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
-* `cookieName` The cookie name. Default ist `_blockGA`
+* `cookieName` The cookie name. Default ist `_ga`
 * `cookieDomain`  The cookie domain.
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
