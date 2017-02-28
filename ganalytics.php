@@ -122,35 +122,93 @@ class GanalyticsPlugin extends Plugin
     }
 
     /**
+     * Returns a canonical IP4 address which can be string-compared to another canonical IP address
+     * @param string $originalIPAddress IP4 adress string in decimal dot notation (e.g. '127.0.0.1')
+     * @return string (e.g. '127.000.000.001')
+     */
+    private static function canonicalIPAddress($originalIPAddress)
+    {
+        $adressBytes = array_merge(explode('.', $originalIPAddress), ['0', '0', '0', '0']);
+        return sprintf('%03s.%03s.%03s.%03s', $adressBytes[0], $adressBytes[1], $adressBytes[2], $adressBytes[3]);
+    }
+
+    /**
+     * Returns TRUE, if a canonical IP address is within the specified address range
+     * @param string $canonicalAddress
+     * @param string $range
+     * @return boolean
+     */
+    private function inIPAdressRange($canonicalAddress, $range)
+    {
+        if ($range === 'private') {  // RFC 6890
+            return ($this->inIPAdressRange($canonicalAddress, "10.0.0.0-10.255.255.255")
+                || $this->inIPAdressRange($canonicalAddress, "172.16.0.0-172.31.255.255")
+                || $this->inIPAdressRange($canonicalAddress, "192.168.0.0-192.168.255.255"));
+        } elseif ($range === 'loopback') {  // RFC 6890
+            return ($this->inIPAdressRange($canonicalAddress, "127.0.0.0-127.255.255.255"));
+        } elseif ($range === 'link-local') {  // RFC 6890
+            return ($this->inIPAdressRange($canonicalAddress, "169.254.0.0-169.254.255.255"));
+        } else {
+            $rangeLimits = explode('-', $range);
+            if (count($rangeLimits) == 2
+                && strcmp($canonicalAddress, $this->canonicalIPAddress($rangeLimits[0])) >= 0
+                && strcmp($canonicalAddress, $this->canonicalIPAddress($rangeLimits[1])) <= 0) {
+                return TRUE;
+            }
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Documents the reason for blocking GA tracking in a JavaScript comment
+     * @param string $reason
+     */
+    private function documentBlockingReason($reason)
+    {
+        $this->grav['assets']->addInlineJs("/* GA tracking blocked, reason: $reason */");
+    }
+
+    /**
      * Add GA tracking JS when the assets are initialized
      */
     public function onAssetsInitialized()
     {
         // Don't proceed if we are in the admin plugin
-        if ($this->isAdmin()) return;
+        if ($this->isAdmin()) {
+            $this->documentBlockingReason('admin plugin active');
+            return;
+        }
 
         // Don't proceed if there is no GA Tracking ID
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
-        if (empty($trackingId)) return;
+        if (empty($trackingId)) {
+            $this->documentBlockingReason('trackingId not configured');
+            return;
+        }
 
         // Don't proceed if a blocking cookie is set
         $blockingCookieName = $this->config->get('plugins.ganalytics.blockingCookie', '');
-        if (!empty($blockingCookieName)) {
-            if (!empty($_COOKIE[$blockingCookieName]))
-                return;
+        if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
+            $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is set");
+            return;
         }
 
         // Don't proceed if the IP address is blocked
-        $clientIpAddress = $_SERVER['REMOTE_ADDR'];
         $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
-        if (in_array($clientIpAddress, $blockedIps)) return;
+        if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) {
+            $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in blockedIps");
+            return;
+        }
 
         // Don't proceed if the IP address is within a blocked range
+        $canonicalClientIpAddress = $this->canonicalIPAddress($_SERVER['REMOTE_ADDR']);
         $blockedIpRanges = $this->config->get('plugins.ganalytics.blockedIpRanges', []);
         foreach ($blockedIpRanges as $blockedIpRange) {
-            if (is_array($blockedIpRange) && count($blockedIpRange) == 2
-                && $clientIpAddress >= $blockedIpRange[0] && $clientIpAddress <= $blockedIpRange[1])
+            if ($this->inIPAdressRange($canonicalClientIpAddress, $blockedIpRange)) {
+                $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in range \"" . $blockedIpRange . "\"");
                 return;
+            }
         }
 
         // Parameters
