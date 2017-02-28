@@ -133,9 +133,25 @@ class GanalyticsPlugin extends Plugin
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
         if (empty($trackingId)) return;
 
+        // Don't proceed if a blocking cookie is set
+        $blockingCookieName = $this->config->get('plugins.ganalytics.blockingCookie', '');
+        if (!empty($blockingCookieName)) {
+            if (!empty($_COOKIE[$blockingCookieName]))
+                return;
+        }
+
         // Don't proceed if the IP address is blocked
+        $clientIpAddress = $_SERVER['REMOTE_ADDR'];
         $blockedIps = $this->config->get('plugins.ganalytics.blockedIps', []);
-        if (in_array($_SERVER['REMOTE_ADDR'], $blockedIps)) return;
+        if (in_array($clientIpAddress, $blockedIps)) return;
+
+        // Don't proceed if the IP address is within a blocked range
+        $blockedIpRanges = $this->config->get('plugins.ganalytics.blockedIpRanges', []);
+        foreach ($blockedIpRanges as $blockedIpRange) {
+            if (is_array($blockedIpRange) && count($blockedIpRange) == 2
+                && $clientIpAddress >= $blockedIpRange[0] && $clientIpAddress <= $blockedIpRange[1])
+                return;
+        }
 
         // Parameters
         $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';

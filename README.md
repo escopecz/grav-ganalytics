@@ -51,6 +51,8 @@ forceSsl: false
 async: false
 anonymizeIp: false
 blockedIps: []
+blockedIpRanges: [[10.0.0.0, 10.255.255.255], [127.0.0.0, 127.255.255.255], [169.254.0.0, 169.254.255.255], [172.16.0.0, 172.31.255.255], [192.168.0.0, 192.168.255.255]]
+blockingCookie: "blockGA"
 
 cookieConfig: false
 cookieName: "_ga"
@@ -70,9 +72,11 @@ debugTrace: false
 * `objectName` The name for the global (ga) object. Default is `ga`.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
+* `blockedIpRanges` Here you can blacklist IP address ranges in the form `[[from1, to1], [from2, to2], ...]`. For those the Google Analytics script will not be embedded. Default is not to track requests from private, loopback and link local address ranges as these are usually used for testing.
+* `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `_blockGA`
 
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
-* `cookieName` The cookie name. Default ist `_ga`
+* `cookieName` The cookie name. Default ist `_blockGA`
 * `cookieDomain`  The cookie domain.
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 

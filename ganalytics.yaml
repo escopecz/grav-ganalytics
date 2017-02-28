@@ -7,6 +7,9 @@ forceSsl: false             # Enable/Disable SSL
 async: false                # Enable/Disable Asynchronously Tracking
 anonymizeIp: false          # Enable/Disable IP Anonymization
 blockedIps: []              # Array of blocked IP addresses
+blockedIpRanges: [[10.0.0.0, 10.255.255.255], [127.0.0.0, 127.255.255.255], [169.254.0.0, 169.254.255.255], [172.16.0.0, 172.31.255.255], [192.168.0.0, 192.168.255.255]]
+                            # Block private, loopback and link local address ranges
+blockingCookie: "blockGA"   # Name of a cookie blocking GA tracking
 
 cookieConfig: false         # Use custom cookie configuration
 cookieName: "_ga"           # Cookie name
