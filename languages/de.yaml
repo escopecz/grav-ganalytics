@@ -26,7 +26,7 @@ PLUGIN_GANALYTICS:
   BLOCKED_IPS: "Gesperrte IP-Adressen"
   BLOCKED_IPS_HELP: "Für die angegebenen IP-Adressen wird der Google Analytics Code nicht eingebunden"
   BLOCKED_IP_RANGES: "Gesperrte IP-Adressbereiche"
-  BLOCKED_IP_RANGES_HELP: "Für die angegebenen IP-Adressbereiche wird der Google Analytics Code nicht eingebunden"
+  BLOCKED_IP_RANGES_HELP: "Für die angegebenen IPv4- oder IPv6-Adressbereiche wird der Google Analytics Code nicht eingebunden"
   BLOCKED_IP_RANGES_VALUE: "Bereich (z.B. '10.4.3.1-10.4.3.20')"
   BLOCKING_COOKIE: "Sperr-Cookie"
   BLOCKING_COOKIE_HELP: "Name eines Sperr-Cookies, der - wenn gesetzt - die Einbindung von Google Analytics Code verhindert"

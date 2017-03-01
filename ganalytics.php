@@ -122,38 +122,47 @@ class GanalyticsPlugin extends Plugin
     }
 
     /**
-     * Returns a canonical IP4 address which can be string-compared to another canonical IP address
-     * @param string $originalIPAddress IP4 adress string in decimal dot notation (e.g. '127.0.0.1')
-     * @return string (e.g. '127.000.000.001')
+     * Returns a packed IP address which can be directly compared to another packed IP address
+     * @param string $humanReadableIPAddress IPv4 or IPv6 adress in human readable notation
+     * @return string (16 byte packed representation)
      */
-    private static function canonicalIPAddress($originalIPAddress)
+    private function packedIPAddress($humanReadableIPAddress)
     {
-        $adressBytes = array_merge(explode('.', $originalIPAddress), ['0', '0', '0', '0']);
-        return sprintf('%03s.%03s.%03s.%03s', $adressBytes[0], $adressBytes[1], $adressBytes[2], $adressBytes[3]);
+        $result = inet_pton($humanReadableIPAddress);
+
+        if ($result == FALSE)
+            return $this->packedIPAddress('::0');
+        elseif (strlen($result) == 16)
+            return $result;  // IPv6 native
+        else
+            return "\0\0\0\0\0\0\0\0\0\0\0\0" . $result;  // IPv4, expanded to IPv6 compatible length
     }
 
     /**
-     * Returns TRUE, if a canonical IP address is within the specified address range
-     * @param string $canonicalAddress
+     * Returns TRUE, if a packed IP address is within the specified address range
+     * @param string $packedAddress
      * @param string $range
      * @return boolean
      */
-    private function inIPAdressRange($canonicalAddress, $range)
+    private function inIPAdressRange($packedAddress, $range)
     {
-        if ($range === 'private') {  // RFC 6890
-            return ($this->inIPAdressRange($canonicalAddress, "10.0.0.0-10.255.255.255")
-                || $this->inIPAdressRange($canonicalAddress, "172.16.0.0-172.31.255.255")
-                || $this->inIPAdressRange($canonicalAddress, "192.168.0.0-192.168.255.255"));
+        if ($range === 'private') {  // RFC 6890, RFC 4193
+            return ($this->inIPAdressRange($packedAddress, "10.0.0.0-10.255.255.255")
+                || $this->inIPAdressRange($packedAddress, "172.16.0.0-172.31.255.255")
+                || $this->inIPAdressRange($packedAddress, "192.168.0.0-192.168.255.255")
+                || $this->inIPAdressRange($packedAddress, "fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
         } elseif ($range === 'loopback') {  // RFC 6890
-            return ($this->inIPAdressRange($canonicalAddress, "127.0.0.0-127.255.255.255"));
-        } elseif ($range === 'link-local') {  // RFC 6890
-            return ($this->inIPAdressRange($canonicalAddress, "169.254.0.0-169.254.255.255"));
+            return ($this->inIPAdressRange($packedAddress, "127.0.0.1-127.255.255.255")
+                || $this->inIPAdressRange($packedAddress, "::1-::1"));
+        } elseif ($range === 'link-local') {  // RFC 6890, RFC 4291
+            return ($this->inIPAdressRange($packedAddress, "169.254.0.0-169.254.255.255")
+                || $this->inIPAdressRange($packedAddress, "fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
         } else {
             $rangeLimits = explode('-', $range);
-            if (count($rangeLimits) == 2
-                && strcmp($canonicalAddress, $this->canonicalIPAddress($rangeLimits[0])) >= 0
-                && strcmp($canonicalAddress, $this->canonicalIPAddress($rangeLimits[1])) <= 0) {
-                return TRUE;
+            if (count($rangeLimits) == 2) {
+                $lowerLimit = $this->packedIPAddress($rangeLimits[0]);
+                $upperLimit = $this->packedIPAddress($rangeLimits[1]);
+                return $lowerLimit <= $packedAddress && $packedAddress <= $upperLimit;
             }
         }
 
@@ -202,10 +211,10 @@ class GanalyticsPlugin extends Plugin
         }
 
         // Don't proceed if the IP address is within a blocked range
-        $canonicalClientIpAddress = $this->canonicalIPAddress($_SERVER['REMOTE_ADDR']);
+        $packedClientIpAddress = $this->packedIPAddress($_SERVER['REMOTE_ADDR']);
         $blockedIpRanges = $this->config->get('plugins.ganalytics.blockedIpRanges', []);
         foreach ($blockedIpRanges as $blockedIpRange) {
-            if ($this->inIPAdressRange($canonicalClientIpAddress, $blockedIpRange)) {
+            if ($this->inIPAdressRange($packedClientIpAddress, $blockedIpRange)) {
                 $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in range \"" . $blockedIpRange . "\"");
                 return;
             }
