@@ -1,5 +1,5 @@
 PLUGIN_GANALYTICS:
-  _YES: "Yes"  #BUG: Only "YES" or "NO" will not work!
+  _YES: "Sí"  #BUG: Only "YES" or "NO" will not work!
   _NO: "No"    #BUG: Only "YES" or "NO" will not work!
   ENABLED: "Activo"
   DISABLED: "Inactivo"
@@ -21,7 +21,7 @@ PLUGIN_GANALYTICS:
   FORCE_SSL_HELP: "Enviar toda la información utilizando SSL, incluso desde páginas inseguras (HTTP)"
   ANONYMIZE_IP: "Anonimización IP"
   ANONYMIZE_IP_HELP: "Activar la anonimización de la dirección IP"
-  OBJECT_NAME: 'Objeto (ga) global"
+  OBJECT_NAME: "Objeto (ga) global"
   OBJECT_NAME_HELP: "Renombrar el objeto (ga) global de las estadísticas Google"
   BLOCKED_IPS: "Direcciones IP bloquedas"
   BLOCKED_IPS_HELP: "Para estas direcciones IP no se cargará el seguimiento de las estadísticas Google"
