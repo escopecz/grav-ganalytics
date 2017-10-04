@@ -131,6 +131,10 @@ class GanalyticsPlugin extends Plugin
 
         // Don't proceed if there is no GA Tracking ID
         $trackingId = trim($this->config->get('plugins.ganalytics.trackingId', ''));
+        // Add support for environment variables:
+        if (preg_match('/env:(.*)/', $trackingId, $match)) {
+            $trackingId = getenv($match[1]);
+        }
         if (empty($trackingId)) return;
 
         // Don't proceed if the IP address is blocked
