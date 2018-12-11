@@ -49,6 +49,22 @@ class GanalyticsPlugin extends Plugin
     }
 
     /**
+     * Returns the Google Analytics opt out configuration.
+     * @return array
+     */
+    private function getOptOutConfiguration(){
+        $optout_config = $this->config->get('plugins.ganalytics.optOutEnabled', false);
+        if (!$optout_config) return [];
+
+        $optout_config = [
+          'optoutMessage' => trim($this->config->get('plugins.ganalytics.optOutMessage', 'Google tracking is now disabled.')),
+          'cookieExpires' => gmdate ("D, d-M-Y H:i:s \U\T\C", $this->config->get('plugins.ganalytics.cookieExpires', 63072000) + time()),
+        ];
+
+        return $optout_config;
+    }
+
+    /**
      * Return the Google Analytics Tracking Code
      * @param string $scriptName Name of the GA script library
      * @param string $objectName Global variable name for the GA object
@@ -70,6 +86,30 @@ class GanalyticsPlugin extends Plugin
                 "})(window,document,'script','//www.google-analytics.com/{$scriptName}.js','{$objectName}');\n"
             ;
         }
+        return $code;
+    }
+
+    /**
+     * Return the Google Analytics Opt Out Code
+     * @param string $trackingId Google Analytics Tracking ID
+     * @param array $config Out Out settings
+     * @return string
+     */
+    private function getOptOutCode($trackingId, $config)
+    {
+        $code = <<<JSCODE
+
+            var disableStr = 'ga-disable-$trackingId'; 
+            if (document.cookie.indexOf(disableStr + '=true') > -1) { 
+                window[disableStr] = true;
+            } 
+            function gaOptout() { 
+                document.cookie = disableStr + '=true; expires={$config['cookieExpires']}; path=/'; 
+                window[disableStr] = true; 
+                alert('{$config['optoutMessage']}'); 
+            } 
+
+JSCODE;
         return $code;
     }
 
@@ -143,9 +183,14 @@ class GanalyticsPlugin extends Plugin
         $async      = $this->config->get('plugins.ganalytics.async', false);
         $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
 
-        // Tracking Code and settings
+        // Opt Out and Tracking Code and settings
+        $code = ''; // init
+        $optout_config = $this->getOptOutConfiguration();
+        if (!empty($optout_config)) {
+            $code .= $this->getOptOutCode($trackingId, $optout_config);
+        }
         $settings = $this->getTrackingSettings($trackingId, $objectName);
-        $code = $this->getTrackingCode($scriptName, $objectName, $async);
+        $code .= $this->getTrackingCode($scriptName, $objectName, $async);
         $code.= join(PHP_EOL, $settings);
 
         // Embed Google Analytics script

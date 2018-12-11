@@ -11,6 +11,7 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 * Debug Mode with Trace Debugging
 * Custom Cookie Configuration. Name, domain and expiration time are configurable.
 * Blocking IP Addresses
+* Opt Out (disable tracking by the user)
 * Multi-Language Support for the [Grav Administration Panel](https://github.com/getgrav/grav-plugin-admin)
 
 ## Installation
@@ -57,6 +58,9 @@ cookieName: "_ga"
 cookieDomain: ""
 cookieExpires: 63072000
 
+optOutEnabled: false
+optOutMessage: "Google tracking is now disabled."
+
 debugStatus: false
 debugTrace: false
 ```
@@ -76,6 +80,11 @@ debugTrace: false
 * `cookieDomain`  The cookie domain.
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
+* `optOutEnabled` Toggles if opt out function is turned on or off.
+* `optOutMessage` Info message show to the user when opt out function is called
+
+  The opt out function is called by a link like `<a href="javascript:gaOptout()">Disable Google Analytics</a>`  
+
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
 
@@ -88,3 +97,5 @@ debugTrace: false
 5. Under _PROPERTY_, click **Tracking Info > Tracking Code**.
 6. Copy the **Tracking ID** (a string like _UA-000000-01_)
 7. Add it to the configuration of this plugin.
+
+More Info about disabling the Google Analytics tracking code: https://developers.google.com/analytics/devguides/collection/gajs/#disable

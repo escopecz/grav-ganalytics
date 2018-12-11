@@ -13,5 +13,8 @@ cookieName: "_ga"           # Cookie name
 cookieDomain: ""            # Cookie domain
 cookieExpires: 63072000     # Expiration time in seconds (Default: 2 years)
 
+optOutEnabled: false        # enable opt out function
+optOutMessage: ""           # Alert info message on opt out
+
 debugStatus: false          # Enable/disable Debugging
 debugTrace: false           # Enable/Disable Trace Debugging
