@@ -81,9 +81,7 @@ debugTrace: false
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
 * `optOutEnabled` Toggles if opt out function is turned on or off.
-* `optOutMessage` Info message show to the user when opt out function is called
-
-  The opt out function is called by a link like `<a href="javascript:gaOptout()">Disable Google Analytics</a>`  
+* `optOutMessage` Info message shown to the user when opt out function is called
 
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
@@ -98,4 +96,11 @@ debugTrace: false
 6. Copy the **Tracking ID** (a string like _UA-000000-01_)
 7. Add it to the configuration of this plugin.
 
-More Info about disabling the Google Analytics tracking code: https://developers.google.com/analytics/devguides/collection/gajs/#disable
+To give your users the possibility to disable Google Analytics tracking you have to enable "opt out" in this plugin and put the following link somewhere in your pages, e.g. in your Privacy Declaration:
+
+```html
+<a href="javascript:gaOptout()">Disable Google Analytics</a>
+```
+
+The link must be inserted as HTML tags and not in markdown syntax.  
+For more Info about disabling the Google Analytics tracking see: https://developers.google.com/analytics/devguides/collection/gajs/#disable
