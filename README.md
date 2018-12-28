@@ -81,7 +81,7 @@ debugTrace: false
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
 * `optOutEnabled` Toggles if opt out function is turned on or off.
-* `optOutMessage` Info message shown to the user when opt out function is called
+* `optOutMessage` Confirmation message shown to the user when opt out function is called
 
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.

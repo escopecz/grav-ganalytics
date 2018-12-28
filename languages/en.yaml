@@ -37,3 +37,7 @@ PLUGIN_GANALYTICS:
   DEBUG_STATUS_HELP: "Enable the debug version of the analytics.js library"
   DEBUG_TRACE: "Trace Debugging"
   DEBUG_TRACE_HELP: "Enabling trace debugging will output more verbose information to the console"
+  OPTOUT_STATUS: "Tracking opt out"
+  OPTOUT_STATUS_HELP: "Visitor can disable tracking by Google Analytics"
+  OPTOUT_MESSAGE: "Confirmation on opt out"
+  OPTOUT_MESSAGE_HELP: "Confirmation message shown to the visitor when she/he disables tracking"

@@ -37,3 +37,7 @@ PLUGIN_GANALYTICS:
   DEBUG_STATUS_HELP: "Activar la depuración en la librería analytics.js"
   DEBUG_TRACE: "Seguimiento Depuración"
   DEBUG_TRACE_HELP: "Activar el seguimiento de depuración para obtener más información en la consola"
+  OPTOUT_STATUS: "Optar por no"
+  OPTOUT_STATUS_HELP: "Los visitantes pueden desactivar el seguimiento de Google Analytics"
+  OPTOUT_MESSAGE: "Confirmación en optar por no"
+  OPTOUT_MESSAGE_HELP: "Confirmación mostrada cuando el seguimiento está desactivado"

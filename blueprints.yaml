@@ -116,6 +116,25 @@ form:
                   help: PLUGIN_GANALYTICS.BLOCKED_IPS_HELP
                   value_only: true
 
+                optOutEnabled:
+                  type: toggle
+                  label: PLUGIN_GANALYTICS.OPTOUT_STATUS
+                  help: PLUGIN_GANALYTICS.OPTOUT_STATUS_HELP
+                  hightlight: 0
+                  default: 0
+                  options:
+                    1: PLUGIN_GANALYTICS.ENABLED
+                    0: PLUGIN_GANALYTICS.DISABLED
+                  validate:
+                    type: bool
+
+                optOutMessage:
+                  type: text
+                  label: PLUGIN_GANALYTICS.OPTOUT_MESSAGE
+                  help: PLUGIN_GANALYTICS.OPTOUT_MESSAGE_HELP
+                  size: medium
+                  default: "Google tracking is now disabled."
+
         cookie:
           type: tab
           title: PLUGIN_GANALYTICS.SECTION_COOKIE
