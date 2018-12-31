@@ -41,3 +41,4 @@ PLUGIN_GANALYTICS:
   OPTOUT_STATUS_HELP: "Los visitantes pueden desactivar el seguimiento de Google Analytics"
   OPTOUT_MESSAGE: "Confirmación en optar por no"
   OPTOUT_MESSAGE_HELP: "Confirmación mostrada cuando el seguimiento está desactivado"
+  OPTOUT_HINT: "Para que sus visitantes puedan desactivar el seguimiento de Google Analytics, active &quot;opt out&quot; aquí e inserte el siguiente enlace en algún lugar de sus páginas:"    

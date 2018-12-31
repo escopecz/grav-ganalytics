@@ -102,5 +102,6 @@ To give your users the possibility to disable Google Analytics tracking you have
 <a href="javascript:gaOptout()">Disable Google Analytics</a>
 ```
 
-The link must be inserted as HTML tags and not in markdown syntax.  
+The link must be inserted as HTML tags and not in markdown syntax. 
+When this link is clicked, then the official ga-disable-cookie is set and Google stopps tracking this visitor.
 For more Info about disabling the Google Analytics tracking see: https://developers.google.com/analytics/devguides/collection/gajs/#disable
