@@ -11,6 +11,7 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 * Debug Mode with Trace Debugging
 * Custom Cookie Configuration. Name, domain and expiration time are configurable.
 * Blocking IP Addresses
+* Opt Out (disable tracking by the user)
 * Multi-Language Support for the [Grav Administration Panel](https://github.com/getgrav/grav-plugin-admin)
 
 ## Installation
@@ -51,11 +52,16 @@ forceSsl: false
 async: false
 anonymizeIp: false
 blockedIps: []
+blockedIpRanges: ["private", "loopback", "link-local"]
+blockingCookie: "blockGA"
 
 cookieConfig: false
 cookieName: "_ga"
 cookieDomain: ""
 cookieExpires: 63072000
+
+optOutEnabled: false
+optOutMessage: "Google tracking is now disabled."
 
 debugStatus: false
 debugTrace: false
@@ -70,11 +76,16 @@ _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `objectName` The name for the global (ga) object. Default is `ga`.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
+* `blockedIpRanges` Here you can blacklist IPv4 and/or IPv6 address ranges in the form `["192.177.204.1-192.177.204.254", "2001:db8::1-2001:db8::fe", ...]`. In addition to numerical ranges, the keywords "private", "loopback", "link-local" designate special IPv4 and IPv6 ranges (see RFCs 6890, 4193, 4291). For blacklisted ranges the Google Analytics script will not be embedded.
+* `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `blockGA`
 
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
 * `cookieName` The cookie name. Default ist `_ga`
 * `cookieDomain`  The cookie domain.
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
+
+* `optOutEnabled` Toggles if opt out function is turned on or off.
+* `optOutMessage` Confirmation message shown to the user when opt out function is called
 
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
@@ -88,3 +99,13 @@ _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 5. Under _PROPERTY_, click **Tracking Info > Tracking Code**.
 6. Copy the **Tracking ID** (a string like _UA-000000-01_)
 7. Add it to the configuration of this plugin.
+
+To give your users the possibility to disable Google Analytics tracking you have to enable "opt out" in this plugin and put the following link somewhere in your pages, e.g. in your Privacy Declaration:
+
+```html
+<a href="javascript:gaOptout()">Disable Google Analytics</a>
+```
+
+The link must be inserted as HTML tags and not in markdown syntax. 
+When this link is clicked, then the official ga-disable-cookie is set and Google stopps tracking this visitor.
+For more Info about disabling the Google Analytics tracking see: https://developers.google.com/analytics/devguides/collection/gajs/#disable
