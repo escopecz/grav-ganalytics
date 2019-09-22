@@ -69,7 +69,7 @@ debugTrace: false
 
 * `enabled` Toggles if the Google Analytics plugin is turned on or off.
 * `trackingId` The Google Analytics Tracking ID. This value is **required**.
-
+_(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `position` Code Position in the HTML document (`head` or `body`). Default is `head`.
 * `async` Toggles if the Google Analytics script is preloaded asynchronously.
 * `forceSsl` Toggles if Google Analytics should send all data using HTTPS.
