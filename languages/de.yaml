@@ -37,3 +37,8 @@ PLUGIN_GANALYTICS:
   DEBUG_STATUS_HELP: "Aktiviert die Debugging-Version der analytics.js Bibliothek"
   DEBUG_TRACE: "Trace-Debugging"
   DEBUG_TRACE_HELP: "Ausführlichere Informationen werden auf der Konsole ausgegeben"
+  OPTOUT_STATUS: "Tracking Opt-Out"
+  OPTOUT_STATUS_HELP: "Besucher können das Tracking durch Google Analytics abschalten"
+  OPTOUT_MESSAGE: "Bestätigung beim Opt-Out"
+  OPTOUT_MESSAGE_HELP: "Angezeigte Bestätigung, wenn Tracking abgeschaltet wird"
+  OPTOUT_HINT: "Damit Ihre Besucher Google Analytics Tracking abschalten können müssen Sie &quot;opt out&quot; hier aktivieren und den folgenden Link irgendwo auf Ihren Seiten einfügen:"
