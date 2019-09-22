@@ -116,6 +116,21 @@ form:
                   help: PLUGIN_GANALYTICS.BLOCKED_IPS_HELP
                   value_only: true
 
+                blockedIpRanges:
+                  type: array
+                  size: large
+                  label: PLUGIN_GANALYTICS.BLOCKED_IP_RANGES
+                  help: PLUGIN_GANALYTICS.BLOCKED_IP_RANGES_HELP
+                  placeholder_value: PLUGIN_GANALYTICS.BLOCKED_IP_RANGES_VALUE
+                  value_only: true
+
+                blockingCookie:
+                  type: text
+                  label: PLUGIN_GANALYTICS.BLOCKING_COOKIE
+                  help: PLUGIN_GANALYTICS.BLOCKING_COOKIE_HELP
+                  size: small
+                  default: "blockGA"
+
         cookie:
           type: tab
           title: PLUGIN_GANALYTICS.SECTION_COOKIE
