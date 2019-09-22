@@ -171,6 +171,41 @@ form:
                   type: number
                   min: 0
 
+        optout:
+          type: tab
+          title: Opt-Out
+          fields:
+                hint:
+                  type: spacer
+                  text: PLUGIN_GANALYTICS.OPTOUT_HINT
+                  underline: false
+
+                linkhint:
+                  type: display
+                  size: large
+                  label: Opt-Out-Link
+                  markdown: true
+                  content: `<a href="javascript:gaOptout()">Disable Google Analytics ...</a>`
+
+                optOutEnabled:
+                  type: toggle
+                  label: PLUGIN_GANALYTICS.OPTOUT_STATUS
+                  help: PLUGIN_GANALYTICS.OPTOUT_STATUS_HELP
+                  hightlight: 0
+                  default: 0
+                  options:
+                    1: PLUGIN_GANALYTICS.ENABLED
+                    0: PLUGIN_GANALYTICS.DISABLED
+                  validate:
+                    type: bool
+
+                optOutMessage:
+                  type: text
+                  label: PLUGIN_GANALYTICS.OPTOUT_MESSAGE
+                  help: PLUGIN_GANALYTICS.OPTOUT_MESSAGE_HELP
+                  size: medium
+                  default: "Google tracking is now disabled."
+
         debug:
           type: tab
           title: PLUGIN_GANALYTICS.SECTION_DEBUG
