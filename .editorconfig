@@ -11,6 +11,6 @@ indent_style = space
 indent_size = 2
 
 # 4 space indentation for PHP
-[*.php, *.inc]
+[{*.php,*.inc}]
 indent_style = space
 indent_size = 4

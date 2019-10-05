@@ -20,7 +20,7 @@ Installing the Google Analytics plugin can be done in one of two ways. The GPM (
 
 ### GPM Installation (Preferred)
 
-The simplest way to install this plugin is via the [Grav Package Manager (GPM)](http://learn.getgrav.org/advanced/grav-gpm) through your system's terminal (also called the command line).  From the root of your Grav install type:
+The simplest way to install this plugin is via the [Grav Package Manager (GPM)](https://learn.getgrav.org/advanced/grav-gpm) through your system's terminal (also called the command line).  From the root of your Grav install type:
 
     bin/gpm install ganalytics
 
@@ -28,7 +28,7 @@ This will install the Google Analytics plugin into your `/user/plugins` director
 
 ### Manual Installation
 
-To install this plugin, just download the zip version of this repository and unzip it under `/your/site/grav/user/plugins`. Then, rename the folder to `ganalytics`. You can find these files on [GitHub](https://github.com/escopecz/grav-ganalytics) or via [GetGrav.org](http://getgrav.org/downloads/plugins).
+To install this plugin, just download the zip version of this repository and unzip it under `/your/site/grav/user/plugins`. Then, rename the folder to `ganalytics`. You can find these files on [GitHub](https://github.com/escopecz/grav-ganalytics) or via [GetGrav.org](https://getgrav.org/downloads/plugins).
 
 You should now have all the plugin files under
 
@@ -48,10 +48,12 @@ trackingId: ""
 
 position: "head"
 objectName: "ga"
-forceSsl: false
+forceSsl: true
 async: false
-anonymizeIp: false
+anonymizeIp: true
 blockedIps: []
+blockedIpRanges: ["private", "loopback", "link-local"]
+blockingCookie: "blockGA"
 
 cookieConfig: false
 cookieName: "_ga"
@@ -67,13 +69,15 @@ debugTrace: false
 
 * `enabled` Toggles if the Google Analytics plugin is turned on or off.
 * `trackingId` The Google Analytics Tracking ID. This value is **required**.
-
+_(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `position` Code Position in the HTML document (`head` or `body`). Default is `head`.
 * `async` Toggles if the Google Analytics script is preloaded asynchronously.
 * `forceSsl` Toggles if Google Analytics should send all data using HTTPS.
 * `objectName` The name for the global (ga) object. Default is `ga`.
 * `anonymizeIp` Toggles if Google Analytics will anonymize the IP address for all hits.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
+* `blockedIpRanges` Here you can blacklist IPv4 and/or IPv6 address ranges in the form `["192.177.204.1-192.177.204.254", "2001:db8::1-2001:db8::fe", ...]`. In addition to numerical ranges, the keywords "private", "loopback", "link-local" designate special IPv4 and IPv6 ranges (see RFCs 6890, 4193, 4291). For blacklisted ranges the Google Analytics script will not be embedded.
+* `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `blockGA`
 
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
 * `cookieName` The cookie name. Default ist `_ga`

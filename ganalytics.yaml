@@ -3,10 +3,12 @@ trackingId: ""              # GA Tracking ID `REQUIRED`
 
 position: "head"            # Code Position in the HTML document
 objectName: "ga"            # Name for the global (ga) object
-forceSsl: false             # Enable/Disable SSL
+forceSsl: true              # Enable/Disable SSL
 async: false                # Enable/Disable Asynchronously Tracking
-anonymizeIp: false          # Enable/Disable IP Anonymization
+anonymizeIp: true           # Enable/Disable IP Anonymization
 blockedIps: []              # Array of blocked IP addresses
+blockedIpRanges: ["private", "loopback", "link-local"] # Array of blocked IP address ranges
+blockingCookie: "blockGA"   # Name of a cookie blocking GA tracking
 
 cookieConfig: false         # Use custom cookie configuration
 cookieName: "_ga"           # Cookie name
