@@ -17,6 +17,7 @@ cookieExpires: 63072000     # Expiration time in seconds (Default: 2 years)
 
 optOutEnabled: false        # enable opt out function
 optOutMessage: ""           # confirmation message on opt out
+optOutRevertMessage: ""     # confirmation message on reverting opt out
 
 debugStatus: false          # Enable/disable Debugging
 debugTrace: false           # Enable/Disable Trace Debugging

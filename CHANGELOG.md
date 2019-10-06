@@ -1,3 +1,14 @@
+# v1.5.0
+## 05/10/2019
+
+1. [](#new)
+    * Add Google Analytics Out Out Link and Callback Functions to disable tracking
+    * Add capabilities to block address ranges and use a blocking cookie
+1. [](#improved)
+    * spanish added for Admin Panel
+    * forceSsl: true as default
+    * Added support for environment variabels
+
 # v1.4.0
 ## 01/04/2017
 

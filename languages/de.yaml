@@ -9,6 +9,7 @@ PLUGIN_GANALYTICS:
   SECTION_ADVANCED: "Erweitert"
   SECTION_COOKIE: "Cookie"
   SECTION_DEBUG: "Debugging"
+  SECTION_CODESAMPLES: "HTML/JavaScript Code Beispiele"
   TACKING_ID: "Tracking-ID"
   TACKING_ID_HELP: "Google Analytics Tracking-ID"
   POSITION: "Code-Position"
@@ -47,3 +48,6 @@ PLUGIN_GANALYTICS:
   OPTOUT_MESSAGE: "Bestätigung beim Opt-Out"
   OPTOUT_MESSAGE_HELP: "Angezeigte Bestätigung, wenn Tracking abgeschaltet wird"
   OPTOUT_HINT: "Damit Ihre Besucher Google Analytics Tracking abschalten können müssen Sie &quot;opt out&quot; hier aktivieren und den folgenden Link irgendwo auf Ihren Seiten einfügen:"
+  OPTOUT_REVERT_MESSAGE: "Bestätigung beim erneuten Opt-In"
+  OPTOUT_REVERT_MESSAGE_HELP: "Angezeigte Bestätigung, wenn Tracking wieder eingeschaltet wird"
+  OPTOUT_REVERT_HINT: 'HTML/JavaScript-Code-Beispiel einer Checkbox, um Google Analytics Tracking Status anzuzeigen und zu deaktivieren/aktivieren: siehe <a href="https://github.com/escopecz/grav-ganalytics/blob/master/README.md" target="_blank">Plugin README</a>.'

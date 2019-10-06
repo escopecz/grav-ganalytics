@@ -1,5 +1,5 @@
 name: Google Analytics
-version: 1.4.0
+version: 1.5.0
 description: "Easily integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
@@ -175,18 +175,6 @@ form:
           type: tab
           title: Opt-Out
           fields:
-                hint:
-                  type: spacer
-                  text: PLUGIN_GANALYTICS.OPTOUT_HINT
-                  underline: false
-
-                linkhint:
-                  type: display
-                  size: large
-                  label: Opt-Out-Link
-                  markdown: true
-                  content: `<a href="javascript:gaOptout()">Disable Google Analytics ...</a>`
-
                 optOutEnabled:
                   type: toggle
                   label: PLUGIN_GANALYTICS.OPTOUT_STATUS
@@ -205,6 +193,36 @@ form:
                   help: PLUGIN_GANALYTICS.OPTOUT_MESSAGE_HELP
                   size: medium
                   default: "Google tracking is now disabled."
+
+                optOutRevertMessage:
+                  type: text
+                  label: PLUGIN_GANALYTICS.OPTOUT_REVERT_MESSAGE
+                  help: PLUGIN_GANALYTICS.OPTOUT_REVERT_MESSAGE_HELP
+                  size: medium
+                  default: "Google tracking is now enabled."
+
+                codesamples:
+                  type: section
+                  title: PLUGIN_GANALYTICS.SECTION_CODESAMPLES
+                  underline: true
+                  fields:
+
+                    hint:
+                      type: spacer
+                      text: PLUGIN_GANALYTICS.OPTOUT_HINT
+                      underline: false
+
+                    linkhint:
+                      type: display
+                      size: large
+                      label: Opt-Out-Link
+                      markdown: true
+                      content: `<a href="javascript:gaOptout()">Disable Google Analytics ...</a>`
+
+                    hintcallback:
+                      type: spacer
+                      text: PLUGIN_GANALYTICS.OPTOUT_REVERT_HINT
+                      underline: false
 
         debug:
           type: tab

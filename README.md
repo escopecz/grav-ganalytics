@@ -62,6 +62,7 @@ cookieExpires: 63072000
 
 optOutEnabled: false
 optOutMessage: "Google tracking is now disabled."
+optOutRevertMessage: "Google tracking is now enabled."
 
 debugStatus: false
 debugTrace: false
@@ -85,7 +86,8 @@ _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
 * `optOutEnabled` Toggles if opt out function is turned on or off.
-* `optOutMessage` Confirmation message shown to the user when opt out function is called
+* `optOutMessage` Confirmation message shown to the user when opt out function is called.
+* `optOutRevertMessage` Confirmation message shown to the user when opt out function is reverted and tracking is enabled again.
 
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
@@ -109,3 +111,18 @@ To give your users the possibility to disable Google Analytics tracking you have
 The link must be inserted as HTML tags and not in markdown syntax. 
 When this link is clicked, then the official ga-disable-cookie is set and Google stopps tracking this visitor.
 For more Info about disabling the Google Analytics tracking see: https://developers.google.com/analytics/devguides/collection/gajs/#disable
+
+You may also set or delete the official ga-disable-cookie by the JavaScript function `setGaTracking(on)`. See the following code example of a checkbox to show and  disable or enable Google Analytics Tracking:
+
+```html
+<label><input type=checkbox id="gaCheckbox" name="gaCheckbox" value="1" onClick="changeGaTracking()"> Google Analytics Tracking.</label> 
+<script>
+var checkBox = document.getElementById("gaCheckbox");
+checkBox.checked = getGaTracking(); // show tracking status
+function changeGaTracking() {
+  setGaTracking(checkBox.checked); // change tracking status
+}
+</script>
+```
+
+You may also use the JavaScript function `setGaTracking(on)` as a callback function in a cookie consent plugin.
