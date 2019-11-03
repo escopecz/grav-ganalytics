@@ -120,7 +120,7 @@ blockingCookieAllowValue: "{value of this cookie to allow tracking}"
 By this configuration the Google Analytics Tracking code is inserted into the page, only when the blocking cookie with this value is found. 
 In this way the first page view is never tracked because tracking starts after the consent is given by setting the cookie (opt-in).
 
-Example: The configuration for "opt-in" using the cookie consent plugin https://github.com/naucon/grav-plugin-cookieconsent is: 
+Example: The configuration for "opt-in" using the cookie consent plugin https://github.com/naucon/grav-plugin-cookieconsent with compliance_type "opt-in" (v0.5.0) is: 
 ```
 blockingCookie: "cookieconsent_status"
 blockingCookieAllowValue: "allow"
