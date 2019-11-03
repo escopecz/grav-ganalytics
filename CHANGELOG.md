@@ -2,8 +2,8 @@
 ## 05/10/2019
 
 1. [](#new)
-    * Add Google Analytics Out Out Link and Callback Functions to disable tracking
-    * Add capabilities to block address ranges and use a blocking cookie
+    * Add Google Analytics Opt Out Link and Callback Functions to disable tracking
+    * Add capabilities to block address ranges and use a blocking cookie to opt in or opt out tracking
 1. [](#improved)
     * spanish added for Admin Panel
     * forceSsl: true as default

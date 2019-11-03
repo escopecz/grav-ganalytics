@@ -261,9 +261,16 @@ JSCODE;
 
         // Don't proceed if a blocking cookie is set
         $blockingCookieName = $this->config->get('plugins.ganalytics.blockingCookie', '');
-        if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
-            $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is set");
-            return;
+        $blockingCookieAllowValue = $this->config->get('plugins.ganalytics.blockingCookieAllowValue', '');
+        if (!empty($blockingCookieName)) {
+            if (empty($blockingCookieAllowValue) AND !empty($_COOKIE[$blockingCookieName])) {
+                $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is set");
+                return;
+            }
+            if (!empty($blockingCookieAllowValue) AND (empty($_COOKIE[$blockingCookieName]) OR ($blockingCookieAllowValue != $_COOKIE[$blockingCookieName]))) {
+                $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is not set to \"$blockingCookieAllowValue\"");
+                return;
+            }
         }
 
         // Don't proceed if the IP address is blocked

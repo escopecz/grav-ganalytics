@@ -131,6 +131,13 @@ form:
                   size: small
                   default: "blockGA"
 
+                blockingCookieAllowValue:
+                  type: text
+                  label: PLUGIN_GANALYTICS.BLOCKING_COOKIE_ALLOWVALUE
+                  help: PLUGIN_GANALYTICS.BLOCKING_COOKIE_ALLOWVALUE_HELP
+                  size: small
+                  default: ""
+
         cookie:
           type: tab
           title: PLUGIN_GANALYTICS.SECTION_COOKIE
