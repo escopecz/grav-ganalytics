@@ -11,7 +11,8 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 * Debug Mode with Trace Debugging
 * Custom Cookie Configuration. Name, domain and expiration time are configurable.
 * Blocking IP Addresses
-* Opt Out (disable tracking by the user)
+* Opt Out (disable tracking by the user or external cookie)
+* Opt In (explicitly allow tracking by external cookie)
 * Multi-Language Support for the [Grav Administration Panel](https://github.com/getgrav/grav-plugin-admin)
 
 ## Installation
@@ -54,6 +55,7 @@ anonymizeIp: true
 blockedIps: []
 blockedIpRanges: ["private", "loopback", "link-local"]
 blockingCookie: "blockGA"
+blockingCookieAllowValue: ""
 
 cookieConfig: false
 cookieName: "_ga"
@@ -62,6 +64,7 @@ cookieExpires: 63072000
 
 optOutEnabled: false
 optOutMessage: "Google tracking is now disabled."
+optOutRevertMessage: "Google tracking is now enabled."
 
 debugStatus: false
 debugTrace: false
@@ -78,14 +81,16 @@ _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
 * `blockedIpRanges` Here you can blacklist IPv4 and/or IPv6 address ranges in the form `["192.177.204.1-192.177.204.254", "2001:db8::1-2001:db8::fe", ...]`. In addition to numerical ranges, the keywords "private", "loopback", "link-local" designate special IPv4 and IPv6 ranges (see RFCs 6890, 4193, 4291). For blacklisted ranges the Google Analytics script will not be embedded. By default, all three ranges are blocked. If you are using a reverse proxy that redirects traffic to the grav installation, you may need to remove "private".
 * `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `blockGA`
+* `blockingCookieAllowValue` The value of the blocking cookie to explicitly allow tracking. Only when the blocking cookie is set to this value, the Google Analytics script will be embedded. Default is `` (not set).
 
 * `cookieConfig`: Toggles if the a custom cookie configuration should be used.
 * `cookieName` The cookie name. Default ist `_ga`
 * `cookieDomain`  The cookie domain.
 * `cookieExpires` The cookie expiration time in seconds. Google default is 2 years (`63072000` seconds)
 
-* `optOutEnabled` Toggles if opt out function is turned on or off.
-* `optOutMessage` Confirmation message shown to the user when opt out function is called
+* `optOutEnabled` Toggles if opt out JavaScript functions are turned on or off.
+* `optOutMessage` Confirmation message shown to the user when opt out function is called.
+* `optOutRevertMessage` Confirmation message shown to the user when opt out function is reverted and tracking is enabled again.
 
 * `debugStatus` Toggles if the debug version of Google Analytics is enabled or disabled.
 * `debugTrace` Toggles if the debugger will output more verbose information to the console. `debugStatus` must be enabled.
@@ -100,12 +105,58 @@ _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 6. Copy the **Tracking ID** (a string like _UA-000000-01_)
 7. Add it to the configuration of this plugin.
 
-To give your users the possibility to disable Google Analytics tracking you have to enable "opt out" in this plugin and put the following link somewhere in your pages, e.g. in your Privacy Declaration:
+### Disable tracking
+There are three ways to give your users the possibility to disable Google Analytics tracking:
++ Opt-In by external cookie
++ Opt-Out by external cookie
++ Opt-Out by JavaScript function call
+ 
+#### Opt-In by Cookie
+You may use a cookie consent function or plugin to set a blocking cookie to explicitly allow tracking:
+```
+blockingCookie: "{name of the cookie}"
+blockingCookieAllowValue: "{value of this cookie to allow tracking}"
+```
+By this configuration the Google Analytics Tracking code is inserted into the page, only when the blocking cookie with this value is found. 
+In this way the first page view is never tracked because tracking starts after the consent is given by setting the cookie (opt-in).
+
+Example: The configuration for "opt-in" using the cookie consent plugin https://github.com/naucon/grav-plugin-cookieconsent with compliance_type "opt-in" (v0.5.0) is: 
+```
+blockingCookie: "cookieconsent_status"
+blockingCookieAllowValue: "allow"
+```
+
+#### Opt-Out by Cookie
+You may use a cookie consent function or plugin to set a blocking cookie to disable tracking:
+```
+blockingCookie: "{name of the cookie}"
+blockingCookieAllowValue: "" {empty}
+```
+By this configuration the Google Analytics Tracking code is removed from the page, when the blocking cookie is found, regardless of its value. 
+In this way the first page view always is tracked because tracking stops after the cookie is set (opt-out).
+
+#### Opt-Out by JavaScript
+You have to enable "opt out" in this plugin and put the following link somewhere in your pages, e.g. in your Privacy Declaration:
 
 ```html
 <a href="javascript:gaOptout()">Disable Google Analytics</a>
 ```
 
 The link must be inserted as HTML tags and not in markdown syntax. 
-When this link is clicked, then the official ga-disable-cookie is set and Google stopps tracking this visitor.
+When this link is clicked, then the official ga-disable-cookie is set and Google stops tracking this visitor.
 For more Info about disabling the Google Analytics tracking see: https://developers.google.com/analytics/devguides/collection/gajs/#disable
+
+You may also set or delete the official ga-disable-cookie by the JavaScript function `setGaTracking(on)`. See the following code example of a checkbox to show and  disable or enable Google Analytics Tracking:
+
+```html
+<label><input type=checkbox id="gaCheckbox" name="gaCheckbox" value="1" onClick="changeGaTracking()"> Google Analytics Tracking.</label> 
+<script>
+var checkBox = document.getElementById("gaCheckbox");
+checkBox.checked = getGaTracking(); // show tracking status
+function changeGaTracking() {
+  setGaTracking(checkBox.checked); // change tracking status
+}
+</script>
+```
+
+You may also use the JavaScript function `setGaTracking(on)` as a callback function in a cookie consent plugin.

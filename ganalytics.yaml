@@ -8,15 +8,17 @@ async: false                # Enable/Disable Asynchronously Tracking
 anonymizeIp: true           # Enable/Disable IP Anonymization
 blockedIps: []              # Array of blocked IP addresses
 blockedIpRanges: ["private", "loopback", "link-local"] # Array of blocked IP address ranges
-blockingCookie: "blockGA"   # Name of a cookie blocking GA tracking
+blockingCookie: "blockGA"   # Name of a cookie blocking GA tracking (opt out)
+blockingCookieAllowValue: "" # Value of this cookie to allow GA tracking (opt in)
 
 cookieConfig: false         # Use custom cookie configuration
 cookieName: "_ga"           # Cookie name
 cookieDomain: ""            # Cookie domain
 cookieExpires: 63072000     # Expiration time in seconds (Default: 2 years)
 
-optOutEnabled: false        # enable opt out function
+optOutEnabled: false        # enable opt out javascript functions
 optOutMessage: ""           # confirmation message on opt out
+optOutRevertMessage: ""     # confirmation message on reverting opt out
 
 debugStatus: false          # Enable/disable Debugging
 debugTrace: false           # Enable/Disable Trace Debugging

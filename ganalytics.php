@@ -58,6 +58,7 @@ class GanalyticsPlugin extends Plugin
 
         $optout_config = [
           'optoutMessage' => trim($this->config->get('plugins.ganalytics.optOutMessage', 'Google tracking is now disabled.')),
+          'optoutRevertMessage' => trim($this->config->get('plugins.ganalytics.optOutRevertMessage', 'Google tracking is now enabled.')),
           'cookieExpires' => gmdate ("D, d-M-Y H:i:s \U\T\C", $this->config->get('plugins.ganalytics.cookieExpires', 63072000) + time()),
         ];
 
@@ -97,6 +98,8 @@ class GanalyticsPlugin extends Plugin
      */
     private function getOptOutCode($trackingId, $config)
     {
+        $optoutAlert = (empty($config['optoutMessage'])?'':'alert("'.$config['optoutMessage'].'");');
+        $optoutRevertAlert = (empty($config['optoutRevertMessage'])?'':'alert("'.$config['optoutRevertMessage'].'");');
         $code = <<<JSCODE
 
             var disableStr = 'ga-disable-$trackingId'; 
@@ -105,9 +108,23 @@ class GanalyticsPlugin extends Plugin
             } 
             function gaOptout() { 
                 document.cookie = disableStr + '=true; expires={$config['cookieExpires']}; path=/'; 
-                window[disableStr] = true; 
-                alert('{$config['optoutMessage']}'); 
-            } 
+                window[disableStr] = true;
+                {$optoutAlert}
+            }
+            function gaRevertOptout() {
+                if (document.cookie.indexOf(disableStr + '=true') > -1) {
+                    window[disableStr] = false;
+                    document.cookie = disableStr + '=false; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+                    {$optoutRevertAlert}
+               }
+            }
+            function setGaTracking(on) {
+                if (on==1) gaRevertOptout()
+                else gaOptout();
+            }
+            function getGaTracking() {
+                return (window[disableStr])?0:1;
+            }
 
 JSCODE;
         return $code;
@@ -244,9 +261,16 @@ JSCODE;
 
         // Don't proceed if a blocking cookie is set
         $blockingCookieName = $this->config->get('plugins.ganalytics.blockingCookie', '');
-        if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
-            $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is set");
-            return;
+        $blockingCookieAllowValue = $this->config->get('plugins.ganalytics.blockingCookieAllowValue', '');
+        if (!empty($blockingCookieName)) {
+            if (empty($blockingCookieAllowValue) AND !empty($_COOKIE[$blockingCookieName])) {
+                $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is set");
+                return;
+            }
+            if (!empty($blockingCookieAllowValue) AND (empty($_COOKIE[$blockingCookieName]) OR ($blockingCookieAllowValue != $_COOKIE[$blockingCookieName]))) {
+                $this->documentBlockingReason("blocking cookie \"$blockingCookieName\" is not set to \"$blockingCookieAllowValue\"");
+                return;
+            }
         }
 
         // Don't proceed if the IP address is blocked
