@@ -1,8 +1,9 @@
 enabled: true               # Global enable/disable the entire plugin
+ga4: true                   # uses the new GA4 format
 trackingId: ""              # GA Tracking ID `REQUIRED`
 
 position: "head"            # Code Position in the HTML document
-objectName: "ga"            # Name for the global (ga) object
+objectName: "gtag"          # Name for the global (gtag) object
 forceSsl: true              # Enable/Disable SSL
 async: false                # Enable/Disable Asynchronously Tracking
 anonymizeIp: true           # Enable/Disable IP Anonymization

@@ -1,15 +1,15 @@
-name: Google Analytics
-version: 1.4.0
+name: GA4 Google Analytics
+version: 2.0~b1
 description: "Easily integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
-  name: John Linhart
-  email: admin@escope.cz
-  url: http://johnlinhart.com
-homepage: https://github.com/escopecz/grav-ganalytics
+  name: Muráncsik Adéna
+  email: adena.murancsik@gmail.com
+  url: http://pegazus.space
+homepage: https://github.com/adeeena/grav-ganalytics
 keywords: google, plugin, tracking, analytics, grav
-bugs: https://github.com/escopecz/grav-ganalytics/issues
-docs: https://github.com/escopecz/grav-ganalytics/blob/master/README.md
+bugs: https://github.com/adeeena/grav-ganalytics/issues
+docs: https://github.com/adeeena/grav-ganalytics/blob/master/README.md
 license: MIT
 
 form:
@@ -39,12 +39,23 @@ form:
               validate:
                 type: bool
 
+            ga4:
+              type: toggle
+              label: PLUGIN_GANALYTICS.GA4_MODE
+              hightlight: 1
+              default: 1
+              options:
+                1: PLUGIN_GANALYTICS.GA4_MODE_ENABLED
+                0: PLUGIN_GANALYTICS.GA4_MODE_DISABLED
+              validate:
+                type: bool
+
             trackingId:
               type: text
               size: medium
               label: PLUGIN_GANALYTICS.TACKING_ID
               help: PLUGIN_GANALYTICS.TACKING_ID_HELP
-              placeholder: "UA-00000000-0"
+              placeholder: "G-0000000000 or UA-00000000-0"
               validate:
                 required: true
 
@@ -71,19 +82,7 @@ form:
                   label: PLUGIN_GANALYTICS.OBJECT_NAME
                   help: PLUGIN_GANALYTICS.OBJECT_NAME_HELP
                   size: small
-                  default: "ga"
-
-                async:
-                  type: toggle
-                  label: PLUGIN_GANALYTICS.ASYNC
-                  help: PLUGIN_GANALYTICS.ASYNC_HELP
-                  hightlight: 1
-                  default: 0
-                  options:
-                    1: PLUGIN_GANALYTICS._YES
-                    0: PLUGIN_GANALYTICS._NO
-                  validate:
-                    type: bool
+                  default: "gtag"
 
                 forceSsl:
                   type: toggle

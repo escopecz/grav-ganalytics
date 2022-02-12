@@ -1,3 +1,8 @@
+# 2.0~b1
+## 02/12/2022
+1. [](#new)
+    * Support Google Analytics 4 format.
+
 # v1.4.0
 ## 01/04/2017
 

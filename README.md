@@ -1,9 +1,8 @@
-# Grav Google Analytics Plugin
+# Grav Google Analytics 4 Plugin
 
-The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) allows you to integrate and configure [Google Analytics](https://www.google.com/analytics) without the need to touch any code within your Grav site.
+The **GA4 Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) allows you to integrate and configure [Google Analytics 4](https://www.google.com/analytics) without the need to touch any code within your Grav site.
 
 ### Features
-* Preload the Google Analytics script asynchronously
 * IP Anonymization
 * Choose the Google Analytics code position in the HTML document (head or body).
 * Force SSL (HTTPS). Send all data using SSL, even from insecure (HTTP) pages.
@@ -47,9 +46,8 @@ enabled: true
 trackingId: ""
 
 position: "head"
-objectName: "ga"
+objectName: "gtag"
 forceSsl: true
-async: false
 anonymizeIp: true
 blockedIps: []
 blockedIpRanges: ["private", "loopback", "link-local"]

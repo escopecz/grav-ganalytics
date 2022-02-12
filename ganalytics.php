@@ -66,12 +66,26 @@ class GanalyticsPlugin extends Plugin
 
     /**
      * Return the Google Analytics Tracking Code
+     * @param string $objectName Global variable name for the GA object
+     * @return string
+     */
+    private function getGa4TrackingCode($objectName)
+    {
+        $code = $"window.dataLayer = window.dataLayer || [];\n".
+              "function gtag(){dataLayer.push(arguments);}\n".
+              "gtag('js', new Date());\n";
+
+        return $code;
+    }
+
+    /**
+     * Return the Google Analytics Tracking Code
      * @param string $scriptName Name of the GA script library
      * @param string $objectName Global variable name for the GA object
      * @param bool $async Determine if the GA script should be loaded and executed asynchronously
      * @return string
      */
-    private function getTrackingCode($scriptName, $objectName, $async=false)
+    private function getOldTrackingCode($scriptName, $objectName, $async=false)
     {
         if ($async) {
             $code =
@@ -125,10 +139,7 @@ JSCODE;
 
         $settings = [
           'trace-debug' =>  "window.ga_debug = {trace: true};",
-          'create'      => "{$objectName}('create', '{$trackingId}', {$cookie_config});",
-          'anonymize'   => "{$objectName}('set', 'anonymizeIp', true);",
-          'force-ssl'   => "{$objectName}('set', 'forceSSL', true);",
-          'send'        => "{$objectName}('send', 'pageview');"
+          'config'      => "{$objectName}('config', '{$trackingId}');"
         ];
 
         if (!$this->config->get('plugins.ganalytics.debugTrace', false)) unset ($settings['trace-debug']);
@@ -268,9 +279,10 @@ JSCODE;
 
         // Parameters
         $scriptName = $this->config->get('plugins.ganalytics.debugStatus', false) ? 'analytics_debug' : 'analytics';
-        $objectName = trim($this->config->get('plugins.ganalytics.objectName', 'ga'));
+        $objectName = trim($this->config->get('plugins.ganalytics.objectName', 'gtag'));
         $async      = $this->config->get('plugins.ganalytics.async', false);
         $position   = trim($this->config->get('plugins.ganalytics.position', 'head'));
+        $isNewMode  = $this->config->get('plugins.ganalytics.ga4', false);
 
         // Opt Out and Tracking Code and settings
         $code = ''; // init
@@ -279,13 +291,27 @@ JSCODE;
             $code .= $this->getOptOutCode($trackingId, $optout_config);
         }
         $settings = $this->getTrackingSettings($trackingId, $objectName);
-        $code .= $this->getTrackingCode($scriptName, $objectName, $async);
+
+        if ($isNewMode) {
+          $code .= $this->getGa4TrackingCode($objectName);
+        } else {
+          $code .= $this->getOldTrackingCode($scriptName, $objectName, $async);
+        }
+        
+
         $code.= join(PHP_EOL, $settings);
 
         // Embed Google Analytics script
         $group = ($position == 'body') ? 'bottom' : null;
 
         $this->grav['assets']->addInlineJs($code, null, $group);
-        if ($async) $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async', $group);
+
+        if ($isNewMode) {
+          $this->grav['assets']->addJs("https://www.googletagmanager.com/gtag/js?id={$trackingId}", 9 , true /*pipeline*/, 'async', $group);
+        } else if ($async) {
+          $this->grav['assets']->addJs("//www.google-analytics.com/{$scriptName}.js", 9 , true /*pipeline*/, 'async', $group);
+        }
     }
 }
+
+
