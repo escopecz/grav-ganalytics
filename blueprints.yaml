@@ -1,15 +1,15 @@
-name: GA4 Google Analytics
+name: Google Analytics
 version: 2.0~b1
 description: "Easily integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
-  name: Muráncsik Adéna
-  email: adena.murancsik@gmail.com
-  url: http://pegazus.space
-homepage: https://github.com/adeeena/grav-ganalytics
+  name: John Linhart
+  email: admin@escope.cz
+  url: http://johnlinhart.com
+homepage: https://github.com/escopecz/grav-ganalytics
 keywords: google, plugin, tracking, analytics, grav
-bugs: https://github.com/adeeena/grav-ganalytics/issues
-docs: https://github.com/adeeena/grav-ganalytics/blob/master/README.md
+bugs: https://github.com/escopecz/grav-ganalytics/issues
+docs: https://github.com/escopecz/grav-ganalytics/blob/master/README.md
 license: MIT
 
 form:
