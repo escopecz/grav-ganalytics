@@ -1,5 +1,5 @@
 name: Google Analytics
-version: 2.0~b1
+version: 2.0.0
 description: "Easily integrate and configure Google Analytics without the need to touch any code within your Grav site."
 icon: google
 author:
