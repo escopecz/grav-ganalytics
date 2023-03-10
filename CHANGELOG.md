@@ -1,3 +1,16 @@
+# v1.5.1
+## 03/10/2023
+
+* Fix previously broken 1.5.0 release
+
+# v1.5.0
+## 09/22/2019
+
+* Changes for General Data Protection Regulation (GDPR)
+* Added support for environment variables
+* Add capabilities to block address ranges and use a blocking cookie
+* Opt out code added
+
 # v1.4.0
 ## 01/04/2017
 
@@ -9,7 +22,7 @@
 1. [](#improved)
     * Improve plugin configuration with tab views.
     * Better use and configuration of the global object name. Please use `objectName` instead of `renameGa`. 
-    
+
 # v1.3.0
 ## 12/21/2016
 
@@ -19,14 +32,14 @@
     * Added german translation
 1. [](#bugfix)
     * Fixed the date format in the changelog 
- 
+
 # v1.2.0
 ## 08/11/2016
 
-1. [](#new)    
+1. [](#new)
     * Rename the global (ga) variable of the Google Analytics object
     * Enable the debug version of the analytics.js library + Trace Debugging
-        
+      
 # v1.1.0
 ## 08/02/2016
 
