@@ -1,3 +1,8 @@
+# v1.5.1
+## 03/10/2023
+
+* Fix previously broken 1.5.0 release
+
 # v1.5.0
 ## 09/22/2019
 
