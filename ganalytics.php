@@ -127,9 +127,15 @@ JSCODE;
           'trace-debug' =>  "window.ga_debug = {trace: true};",
           'create'      => "{$objectName}('create', '{$trackingId}', {$cookie_config});",
           'anonymize'   => "{$objectName}('set', 'anonymizeIp', true);",
-          'force-ssl'   => "{$objectName}('set', 'forceSSL', true);",
-          'send'        => "{$objectName}('send', 'pageview');"
+          'force-ssl'   => "{$objectName}('set', 'forceSSL', true);"
         ];
+        // If hitCallback has been specified, include it on pageview send
+        $hitCallback = $this->config->get('plugins.ganalytics.hitCallback');
+        if ($hitCallback) {
+            $settings['send'] = "{$objectName}('send', 'pageview', { hitCallback: $hitCallback });";
+        } else {
+            $settings['send'] = "{$objectName}('send', 'pageview');";
+        }
 
         if (!$this->config->get('plugins.ganalytics.debugTrace', false)) unset ($settings['trace-debug']);
         if (!$this->config->get('plugins.ganalytics.anonymizeIp', false)) unset ($settings['anonymize']);

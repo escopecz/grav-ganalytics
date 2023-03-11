@@ -42,8 +42,8 @@ form:
             trackingId:
               type: text
               size: medium
-              label: PLUGIN_GANALYTICS.TACKING_ID
-              help: PLUGIN_GANALYTICS.TACKING_ID_HELP
+              label: PLUGIN_GANALYTICS.TRACKING_ID
+              help: PLUGIN_GANALYTICS.TRACKING_ID_HELP
               placeholder: "UA-00000000-0"
               validate:
                 required: true
@@ -72,6 +72,13 @@ form:
                   help: PLUGIN_GANALYTICS.OBJECT_NAME_HELP
                   size: small
                   default: "ga"
+
+                hitCallback:
+                  type: textarea
+                  label: PLUGIN_GANALYTICS.HITCALLBACK
+                  help: PLUGIN_GANALYTICS.HITCALLBACK_HELP
+                  size: large
+                  placeholder: "function() { form.submit(); }"
 
                 async:
                   type: toggle
