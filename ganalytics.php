@@ -119,13 +119,15 @@ JSCODE;
 
         $settings = array_merge($settings, $this->getCookieConfiguration());
         if (!empty($settings)) {
-            $settings = str_replace('"', '\'', json_encode($settings));
-            $config = "{$objectName}('config', '{$trackingId}', {$settings});";
-        } else {
-            $config = "{$objectName}('config', '{$trackingId}');";
+            try {
+                $settings = json_encode($settings, JSON_THROW_ON_ERROR);
+                return "{$objectName}('config', '{$trackingId}', {$settings});";
+            } catch (\JsonException $e) {
+                $this->grav['log']->error("plugin.{$this->name}: Invalid cookie settings - {$e->getMessage()}");
+            }
         }
 
-        return $config;
+        return "{$objectName}('config', '{$trackingId}');";
     }
 
     /**
