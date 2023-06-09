@@ -14,11 +14,11 @@ class GanalyticsPlugin extends Plugin
      * @return array
      *
      * The getSubscribedEvents() gives the core a list of events
-     *     that the plugin wants to listen to. The key of each
-     *     array section is the event that the plugin listens to
-     *     and the value (in the form of an array) contains the
-     *     callable (or function) as well as the priority. The
-     *     higher the number the higher the priority.
+     * that the plugin wants to listen to. The key of each
+     * array section is the event that the plugin listens to
+     * and the value (in the form of an array) contains the
+     * callable (or function) as well as the priority. The
+     * higher the number the higher the priority.
      */
     public static function getSubscribedEvents()
     {
@@ -132,6 +132,11 @@ JSCODE;
 
     /**
      * Do something with deprecated settings
+     *
+     * Due to https://github.com/getgrav/grav/issues/3697
+     * this method doesn't store modified settings back to
+     * YAML file. One needs to migrate deprecated configuration
+     * options manually.
      */
     private function processDeprecatedSettings()
     {

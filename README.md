@@ -115,3 +115,5 @@ After upgrade you will probably notice that a lot of old plugin configuration op
 * `cookieName` option was renamed to `cookiePrefix` because you cannot change full cookie name anymore.
 * `objectName` default value was renamed from `ga` to `gtag` to keep it inline with standard GA4 snippet. If you were using custom `objectName` it won't be changed.
 * `debugTrace` option was removed and `debugStatus` was renamed to `debugMode`. GA4 doesn't have debug tracing mode.
+
+**Note: due to a bug in Grav CMS framework all these changes are not migrated automatically. At the moment these configuration options need to be removed/renamed manually.**
