@@ -1,5 +1,5 @@
 # v2.0.0
-## 03/XX/2023
+## 06/09/2023
 
 1. [](#new)
     * BREAKING CHANGE! The plugin now uses Google Analytics 4 API, which is not compatible with an old Universal Analytics functionality. You must migrate your existing Universal Analytics properties to Google Analytics 4 data streams before performing the upgrade. Please, read upgrade section in the [README](https://github.com/escopecz/grav-ganalytics/blob/master/README.md#upgrading-from-1x) file for the detailed steps.
