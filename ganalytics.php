@@ -57,7 +57,7 @@ class GanalyticsPlugin extends Plugin
         if (!$optout_config) return [];
 
         $optout_config = [
-          'optoutMessage' => trim($this->config->get('plugins.ganalytics.optOutMessage', 'Google tracking is now disabled.')),
+          'optoutMessage' => addslashes(trim($this->config->get('plugins.ganalytics.optOutMessage', 'Google tracking is now disabled.'))),
           'cookieExpires' => gmdate ("D, d-M-Y H:i:s \U\T\C", $this->config->get('plugins.ganalytics.cookieExpires', 63072000) + time()),
         ];
 
