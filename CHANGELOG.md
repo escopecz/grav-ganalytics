@@ -1,3 +1,11 @@
+# v2.1.0
+## 06/XX/2023
+
+1. [](#new)
+    * Added "Do Not Track" header support which is enabled by default
+2. [](#bugfix)
+    * Fixed opt-out dialog output when confirmation message contains quotes 
+
 # v2.0.0
 ## 06/09/2023
 

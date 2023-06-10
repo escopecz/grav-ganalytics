@@ -17,6 +17,8 @@ PLUGIN_GANALYTICS:
   POSITION_BODY: "End of Body"
   OBJECT_NAME: "Global (gtag) Object"
   OBJECT_NAME_HELP: "Rename the global (gtag) variable of the Google Analytics object"
+  DNT: "\"Do Not Track\" header support"
+  DNT_HELP: "When enabled, Google Analytics code will not be embedded if a client sends \"Do Not Track\" header"
   BLOCKED_IPS: "Blocked IP addresses"
   BLOCKED_IPS_HELP: "For the given IP addresses the Google Analytics code will not be embedded"
   BLOCKED_IP_RANGES: "Blocked IP address ranges"

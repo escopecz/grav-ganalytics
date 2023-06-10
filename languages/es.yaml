@@ -17,6 +17,8 @@ PLUGIN_GANALYTICS:
   POSITION_BODY: "Final del cuerpo"
   OBJECT_NAME: "Objeto (gtag) global"
   OBJECT_NAME_HELP: "Renombrar el objeto (gtag) global de las estadísticas Google"
+  DNT: "Compatibilidad con el encabezado \"Do Not Track\""
+  DNT_HELP: "Cuando está habilitado, el código de Google Analytics no se incrustará si un cliente envía el encabezado \"Do Not Track\""
   BLOCKED_IPS: "Direcciones IP bloquedas"
   BLOCKED_IPS_HELP: "Para estas direcciones IP no se cargará el seguimiento de las estadísticas Google"
   COOKIE_CONFIG: "Configuración Personalizada"

@@ -7,6 +7,7 @@ The **Google Analytics** Plugin for [Grav CMS](http://github.com/getgrav/grav) a
 * Renaming of the Global (gtag) Object
 * Debug Mode
 * Custom Cookie Configuration. Name prefix, domain and expiration time are configurable.
+* DNT header support
 * Blocking IP Addresses
 * Opt Out (disable tracking by the user)
 * Multi-Language Support for the [Grav Administration Panel](https://github.com/getgrav/grav-plugin-admin)
@@ -45,6 +46,7 @@ trackingId: ""
 
 position: "head"
 objectName: "gtag"
+dnt: true
 blockedIps: []
 blockedIpRanges: ["private", "loopback", "link-local"]
 blockingCookie: "blockGA"
@@ -65,6 +67,7 @@ debugMode: false
 _(You can also use environment variables by entering `env:VAR_NAME` as value)_
 * `position` Code Position in the HTML document (`head` or `body`). Default is `head`.
 * `objectName` The name for the global (gtag) object. Default is `gtag`.
+* `dnt` Enables [Do Not Track header](https://www.w3.org/TR/tracking-dnt/#dnt-header-field) support. When enabled, Google Analytics code will not be embedded if a client sends DNT header. Most browsers do not send this header by default. Header support in the plugin is `enabled` by default though.
 * `blockedIps` Here you can blacklist IP addresses. For those the Google Analytics script will not be embedded.
 * `blockedIpRanges` Here you can blacklist IPv4 and/or IPv6 address ranges in the form `["192.177.204.1-192.177.204.254", "2001:db8::1-2001:db8::fe", ...]`. In addition to numerical ranges, the keywords "private", "loopback", "link-local" designate special IPv4 and IPv6 ranges (see RFCs 6890, 4193, 4291). For blacklisted ranges the Google Analytics script will not be embedded. By default, all three ranges are blocked. If you are using a reverse proxy that redirects traffic to the grav installation, you may need to remove "private".
 * `blockingCookie` The name of a blocking cookie. When such a cookie is set, the Google Analytics script will not be embedded. Default ist `blockGA`

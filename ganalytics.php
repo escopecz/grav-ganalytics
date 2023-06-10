@@ -267,6 +267,12 @@ JSCODE;
             return;
         }
 
+        $dntRespected = $this->config->get('plugins.ganalytics.dnt', true);
+        if ($dntRespected && !empty($_SERVER['HTTP_DNT'])) {
+            $this->documentBlockingReason("Do Not Track header sent by the client");
+            return;
+        }
+
         // Don't proceed if a blocking cookie is set
         $blockingCookieName = $this->config->get('plugins.ganalytics.blockingCookie', '');
         if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
