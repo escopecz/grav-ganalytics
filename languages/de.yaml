@@ -17,6 +17,8 @@ PLUGIN_GANALYTICS:
   POSITION_BODY: "Inhaltsende"
   OBJECT_NAME: "Globales (gtag) Objekt"
   OBJECT_NAME_HELP: "Variablenname des globalen Google Analytics Objekts (gtag)"
+  DNT: "Unterstützung für \"Do Not Track\"-Header"
+  DNT_HELP: "Wenn diese Option aktiviert ist, wird der Google Analytics-Code nicht eingebettet, wenn ein Kunde den \"Do Not Track\"-Header sendet"
   BLOCKED_IPS: "Gesperrte IP-Adressen"
   BLOCKED_IPS_HELP: "Für die angegebenen IP-Adressen wird der Google Analytics Code nicht eingebunden"
   BLOCKED_IP_RANGES: "Gesperrte IP-Adressbereiche"
