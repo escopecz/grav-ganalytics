@@ -163,7 +163,7 @@ form:
                   size: large
                   label: PLUGIN_GANALYTICS.OPTOUT_LINK
                   markdown: true
-                  content: `<a href="javascript:gaOptout()">Disable Google Analytics ...</a>`
+                  content: "`<a href=\"javascript:gaOptout()\">Disable Google Analytics ...</a>`"
 
                 optOutEnabled:
                   type: toggle
