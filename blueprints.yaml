@@ -151,7 +151,7 @@ form:
 
         optout:
           type: tab
-          title: Opt-Out
+          title: PLUGIN_GANALYTICS.SECTION_OPTOUT
           fields:
                 hint:
                   type: spacer
