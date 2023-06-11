@@ -8,6 +8,7 @@ PLUGIN_GANALYTICS:
   SECTION_CONFIGURATION: "Configuración"
   SECTION_ADVANCED: "Avanzada"
   SECTION_COOKIE: "Cookie"
+  SECTION_OPTOUT: "Optar por no"
   SECTION_DEBUG: "Depuración"
   TRACKING_ID: "ID Seguimiento"
   TRACKING_ID_HELP: "ID Seguimiento estadísticas Google"
